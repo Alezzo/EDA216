@@ -177,10 +177,12 @@ public class BookingPane extends BasicPane {
 	private void fillNameList() {
 		nameListModel.removeAllElements();
 		/* --- insert own code here --- */
+		/*
 		ArrayList<String> movies = db.getAllMovies();
 		for (String movie : movies) {
 			nameListModel.addElement(movie);
 		}
+		*/
 	}
 
 	/**
@@ -190,12 +192,14 @@ public class BookingPane extends BasicPane {
 	private void fillDateList() {
 		dateListModel.removeAllElements();
         /* --- insert own code here --- */
+		/*
 		String movieName = nameList.getSelectedValue();
 
 		ArrayList<Date> performances = db.getAllPerformancesForMovie(movieName);
 		for (Date performance : performances) {
 			dateListModel.addElement(performance.toString());
 		}
+		*/
 	}
 
 	/**
@@ -242,12 +246,13 @@ public class BookingPane extends BasicPane {
 		 *            The selected list item.
 		 */
 		public void valueChanged(ListSelectionEvent e) {
+			/*
 			if (nameList.isSelectionEmpty() || dateList.isSelectionEmpty()) {
 				return;
 			}
 			String movieName = nameList.getSelectedValue();
 			String date = dateList.getSelectedValue();
-			/* --- insert own code here --- */
+
 
             Performance performance = db.getInfoForPerformance(movieName, date);
 
@@ -255,6 +260,7 @@ public class BookingPane extends BasicPane {
             fields[PERF_DATE].setText(performance.getperformanceDate());
             fields[THEATER_NAME].setText(performance.gettheaterName());
             fields[FREE_SEATS].setText(performance.getavailableSeats());
+            */
 		}
 	}
 

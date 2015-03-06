@@ -78,37 +78,13 @@ public class Database {
 
 	/* --- insert own code here --- */
 
-	public String getUserByUsername(String username)
+	public ArrayList<String> getCookieNames()
 	{
-		String sql = "select username " +
-				"from Users " +
-				"where username = ?";
 
-		try {
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setString(1, username);
-			System.out.println(ps);
-			ResultSet rs = ps.executeQuery();
+		String sql = "select cookieName " +
+				     "from Cookie ";
 
-			if (!rs.next())
-			{
-				return null;
-			}
-
-			return rs.getString("username");
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	public ArrayList<String> getAllMovies() {
-
-		String sql = "select name " +
-				"from Movies ";
-
-		ArrayList<String> movies = new ArrayList<>();
+		ArrayList<String> cookies = new ArrayList<>();
 
 		try {
 			Statement statement = conn.createStatement();
@@ -116,147 +92,14 @@ public class Database {
 
 			while (rs.next())
 			{
-				movies.add(rs.getString("name"));
+				cookies.add(rs.getString("cookieName"));
 			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
-		return movies;
+		return cookies;
 	}
 
-	public ArrayList<Date> getAllPerformancesForMovie(String movieName) {
-
-		String sql = "select performanceDate " +
-				"from performances " +
-				"where movieName = ?";
-
-		ArrayList<Date> performances = new ArrayList<>();
-
-		try {
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setString(1, movieName);
-
-			ResultSet rs = ps.executeQuery();
-
-			while (rs.next())
-			{
-				performances.add(rs.getDate("performanceDate"));
-			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-		return performances;
-
-	}
-
-    public Performance getInfoForPerformance(String movieName, String performanceDate) {
-
-        String sql = "select movieName, performanceDate, theatherName, availableSeats " +
-                "from performances " +
-                "where movieName = ? and performanceDate = ?";
-
-        PreparedStatement ps = null;
-        Performance performance = null;
-
-        try {
-            ps = conn.prepareStatement(sql);
-            ps.setString(1, movieName);
-            ps.setString(2, performanceDate);
-
-            ResultSet rs = ps.executeQuery();
-
-            while(rs.next())
-            {
-                performance = new Performance(rs.getString("movieName"), rs.getString("performanceDate"),
-                        rs.getString("theatherName"), rs.getInt("availableSeats"));
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                ps.close();
-            } catch (SQLException e2) {
-                // ... can do nothing if things go wrong here
-            }
-        }
-
-        return performance;
-    }
-
-	public boolean bookPerformance(String movieName, Date date, String username) {
-
-		String selectSQL = "select availableSeats, id " +
-				"from Performances " +
-				"where movieName = ? and performanceDate = ? " +
-				"for update";
-
-		String insertSQL = "insert into Reservations " +
-				"values (NULL, ?, ?)";
-
-		String updateSQL = "update Performances " +
-				"set availableSeats = availableSeats-1 " +
-				"where movieName = ? and performanceDate = ?";
-
-		PreparedStatement ps = null;
-
-		try {
-			conn.setAutoCommit(false); // Begin transaction
-
-			ps = conn.prepareStatement(selectSQL);
-			ps.setString(1, movieName);
-			ps.setDate(2, date);
-
-			ResultSet rs = ps.executeQuery();
-
-			if (!rs.next())
-			{
-				conn.rollback();
-				return false;
-			}
-
-			int availableSeats = rs.getInt("availableSeats");
-			int performanceId = rs.getInt("id");
-
-			System.out.println(availableSeats);
-
-			if (availableSeats <= 0) {
-				conn.rollback();
-				return false;
-			}
-
-			ps = conn.prepareStatement(insertSQL);
-			ps.setInt(1, performanceId);
-			ps.setString(2, username);
-			ps.executeUpdate();
-
-			ps = conn.prepareStatement(updateSQL) ;
-			ps.setString(1, movieName);
-			ps.setDate(2, date);
-			ps.executeUpdate();
-
-			conn.commit();
-			conn.setAutoCommit(true);
-
-			return true;
-
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				ps.close();
-				conn.setAutoCommit(true);
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-
-
-		return false;
-	}
 }
