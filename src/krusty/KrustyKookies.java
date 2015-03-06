@@ -1,5 +1,7 @@
 package krusty;
 
+import krusty.gui.KrustyGUI;
+
 /**
  * KrustyKookies is the main class for the movie ticket booking
  * application. It creates a database object and the GUI to
@@ -9,6 +11,6 @@ public class KrustyKookies {
 
     public static void main(String[] args) {
         Database db = new Database();
-        new MovieGUI(db);
+        new KrustyGUI(db);
     }
 }

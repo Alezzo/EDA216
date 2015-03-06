@@ -1,4 +1,4 @@
-package krusty;
+package krusty.gui;
 
 import javax.swing.*;
 

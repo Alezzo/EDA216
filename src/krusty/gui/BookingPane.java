@@ -1,4 +1,6 @@
-package krusty;
+package krusty.gui;
+
+import krusty.*;
 
 import javax.swing.*;
 import javax.swing.event.*;

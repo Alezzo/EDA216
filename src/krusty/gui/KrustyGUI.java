@@ -1,4 +1,6 @@
-package krusty;
+package krusty.gui;
+
+import krusty.Database;
 
 import javax.swing.*;
 import javax.swing.event.*;
@@ -7,10 +9,10 @@ import java.awt.*;
 import java.awt.event.*;
 
 /**
- * MovieGUI is the user interface to the movie database. It sets up the main
+ * KrustyGUI is the user interface to the movie database. It sets up the main
  * window and connects to the database.
  */
-public class MovieGUI {
+public class KrustyGUI {
 	/**
 	 * db is the database object
 	 */
@@ -28,7 +30,7 @@ public class MovieGUI {
 	 * @param db
 	 *            The database.
 	 */
-	public MovieGUI(Database db) {
+	public KrustyGUI(Database db) {
 		this.db = db;
 
 		JFrame frame = new JFrame("KrustyKookies");

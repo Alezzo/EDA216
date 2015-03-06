@@ -1,4 +1,6 @@
-package krusty;
+package krusty.gui;
+
+import krusty.Database;
 
 import javax.swing.*;
 import javax.swing.border.*;

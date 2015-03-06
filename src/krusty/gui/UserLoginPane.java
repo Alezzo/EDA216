@@ -1,6 +1,7 @@
-package krusty;
+package krusty.gui;
 
-import org.omg.CORBA.Current;
+import krusty.CurrentUser;
+import krusty.Database;
 
 import javax.swing.*;
 import java.awt.event.*;
