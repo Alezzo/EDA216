@@ -16,8 +16,10 @@ public class InputPanel extends JPanel {
 	public InputPanel() {
 
 		left = new JPanel();
+		left.setLayout(new GridLayout(0,1,5,5));
+
 		right = new JPanel();
-		right.setLayout(new GridLayout());
+		right.setLayout(new GridLayout(0,1,5,5));
 
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 
@@ -26,8 +28,13 @@ public class InputPanel extends JPanel {
 	}
 
 	public void addComboBox(String label, JComboBox jComboBox) {
-		left.add(new JLabel(label, JLabel.RIGHT));
+		left.add(new JLabel(label + "      ", JLabel.RIGHT));
 		right.add(jComboBox);
+	}
+
+	public void addTextField(String label, JTextField field) {
+		left.add(new JLabel(label + "      ", JLabel.RIGHT));
+		right.add(field);
 	}
 
 	/**

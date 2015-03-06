@@ -20,8 +20,10 @@ public class ProductionPane extends BasicPane {
 		String[] cookieNames = db.getCookieNames();
 		JComboBox cookieList = new JComboBox<>(cookieNames);
 
+		JTextField location = new JTextField();
 
 		inputPanel.addComboBox("Cookie name", cookieList);
+		inputPanel.addTextField("Location", location);
 
 		return inputPanel;
 
