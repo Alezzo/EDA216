@@ -3,25 +3,35 @@ package krusty.gui;
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Scene;
-import javafx.scene.control.DatePicker;
+import javafx.scene.layout.BorderPane;
 import krusty.Database;
 
-import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+public class PalletListPane extends JFXPanel {
 
-public class PalletListPane extends BasicPane {
+	private Database db;
 
-	private JTextField[] fields;
+	private BorderPane pane;
 
-	private static final int COOKIE_NAME = 0;
+	public PalletListPane(Database db) {
+		this.db = db;
 
-	public PalletListPane(Database db) { super(db); }
+		init();
+	}
 
-	public JComponent createTopPanel() {
+	private void init() {
 
-		return new SearchPanel(db);
+		pane = new BorderPane();
 
+		pane.setTop(new SearchBox(db));
+
+		pane.setCenter(new SearchResults(db));
+
+		Platform.runLater(this::createScene);
+	}
+
+	private void createScene() {
+		Scene scene = new Scene(pane);
+		setScene(scene);
 	}
 
 
