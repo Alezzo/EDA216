@@ -39,12 +39,8 @@ public class KrustyGUI {
 		ProductionPane productionPane = new ProductionPane(db);
 		tabbedPane.addTab("Production panel", null, productionPane);
 
-		//UserLoginPane userLoginPane = new UserLoginPane(db);
-		//tabbedPane.addTab("User login", null, userLoginPane,
-		//		"Log in as a new user");
-
-		BookingPane bookingPane = new BookingPane(db);
-		tabbedPane.addTab("Book ticket", null, bookingPane, "Book a ticket");
+		PalletListPane palletListPane = new PalletListPane(db);
+		tabbedPane.addTab("Pallet list/search", null, palletListPane);
 
 		tabbedPane.setSelectedIndex(0);
 
