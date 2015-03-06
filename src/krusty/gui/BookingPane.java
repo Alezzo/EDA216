@@ -166,7 +166,7 @@ public class BookingPane extends BasicPane {
 	 */
 	public void entryActions() {
 		clearMessage();
-		currentUserNameLabel.setText(CurrentUser.instance().getCurrentUserId());
+		//currentUserNameLabel.setText(CurrentUser.instance().getCurrentUserId());
 		fillNameList();
 		clearFields();
 	}
@@ -274,6 +274,7 @@ public class BookingPane extends BasicPane {
 			if (nameList.isSelectionEmpty() || dateList.isSelectionEmpty()) {
 				return;
 			}
+			/*
 			if (!CurrentUser.instance().isLoggedIn()) {
 				displayMessage("Must login first");
 				return;
@@ -283,7 +284,6 @@ public class BookingPane extends BasicPane {
 
 			String movieName = nameList.getSelectedValue();
 			String date = dateList.getSelectedValue();
-			/* --- insert own code here --- */
 
 			if (db.bookPerformance(movieName, Date.valueOf(date), CurrentUser.instance().getCurrentUserId())) {
 				displayMessage("Booked performance");
@@ -296,6 +296,7 @@ public class BookingPane extends BasicPane {
 				displayMessage("Unable to book performance");
 				System.out.println("Unable to book, the minions have been properly punished");
 			}
+			*/
 		}
 	}
 }

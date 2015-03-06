@@ -36,9 +36,9 @@ public class KrustyGUI {
 		JFrame frame = new JFrame("KrustyKookies");
 		tabbedPane = new JTabbedPane();
 
-		UserLoginPane userLoginPane = new UserLoginPane(db);
-		tabbedPane.addTab("User login", null, userLoginPane,
-				"Log in as a new user");
+		//UserLoginPane userLoginPane = new UserLoginPane(db);
+		//tabbedPane.addTab("User login", null, userLoginPane,
+		//		"Log in as a new user");
 
 		BookingPane bookingPane = new BookingPane(db);
 		tabbedPane.addTab("Book ticket", null, bookingPane, "Book a ticket");
@@ -53,15 +53,15 @@ public class KrustyGUI {
 		frame.setSize(500, 400);
 		frame.setVisible(true);
 
-		userLoginPane.displayMessage("Connecting to database ...");
+		//userLoginPane.displayMessage("Connecting to database ...");
 		
 		/* --- change code here --- */
 		/* --- change xxx to your user name, yyy to your password --- */
-		if (db.openConnection("db129", "kmg335rz")) {
-			userLoginPane.displayMessage("Connected to database");
-		} else {
-			userLoginPane.displayMessage("Could not connect to database");
-		}
+		//if (db.openConnection("db129", "kmg335rz")) {
+		//	userLoginPane.displayMessage("Connected to database");
+		//} else {
+		//	userLoginPane.displayMessage("Could not connect to database");
+		//}
 	}
 
 	/**
