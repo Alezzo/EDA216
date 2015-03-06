@@ -5,6 +5,7 @@ import javafx.embed.swing.JFXPanel;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import krusty.Database;
+import krusty.controllers.PalletController;
 
 public class PalletListPane extends JFXPanel {
 
@@ -22,9 +23,11 @@ public class PalletListPane extends JFXPanel {
 
 		pane = new BorderPane();
 
-		pane.setTop(new SearchBox(db));
+		PalletController palletController = new PalletController(db);
 
-		pane.setCenter(new SearchResults(db));
+		pane.setTop(new SearchBox(db, palletController));
+
+		pane.setCenter(new SearchResults(palletController));
 
 		Platform.runLater(this::createScene);
 	}

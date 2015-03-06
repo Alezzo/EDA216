@@ -9,15 +9,18 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import krusty.Database;
+import krusty.controllers.PalletController;
 
 
 public class SearchBox extends GridPane {
 
 	private Database db;
+	private PalletController controller;
 
 
-	public SearchBox(Database db) {
+	public SearchBox(Database db, PalletController controller) {
 		this.db = db;
+		this.controller = controller;
 
 		init();
 	}
