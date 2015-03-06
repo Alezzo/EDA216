@@ -18,13 +18,8 @@ public class PalletController {
 	public PalletController(Database db) {
 		this.db = db;
 
-		List<Pallet> list = new ArrayList<Pallet>();
+		List<Pallet> list = new ArrayList<>();
 		observableList = FXCollections.observableList(list);
-		// TODO: Add listeners for updating the database!
-		// http://docs.oracle.com/javafx/2/collections/jfxpub-collections.htm
-		// Example 4
-
-		// Load the default data..
 		resetSearch();
 	}
 
@@ -40,6 +35,7 @@ public class PalletController {
 
 	public void search() {
 		// TODO: Implement search to db, should update observableList..
+		observableList.add(new Pallet(4, "Test search"));
 	}
 
 }

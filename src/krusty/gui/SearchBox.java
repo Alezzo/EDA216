@@ -4,9 +4,11 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.JFXPanel;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import krusty.Database;
 import krusty.controllers.PalletController;
@@ -60,8 +62,16 @@ public class SearchBox extends GridPane {
 
 
 		Button button = new Button("Search");
+		button.addEventHandler(MouseEvent.MOUSE_CLICKED, new SearchButtonEventHandler());
 		this.add(button, 3, 1);
 
+	}
+
+	private class SearchButtonEventHandler implements EventHandler<MouseEvent> {
+		@Override
+		public void handle(MouseEvent event) {
+			controller.search();
+		}
 	}
 
 
