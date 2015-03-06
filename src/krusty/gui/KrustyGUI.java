@@ -33,7 +33,7 @@ public class KrustyGUI {
 	public KrustyGUI(Database db) {
 		this.db = db;
 
-		JFrame frame = new JFrame("KrustyKookies");
+		JFrame frame = new JFrame("Krusty Kookies");
 		tabbedPane = new JTabbedPane();
 
 		ProductionPane productionPane = new ProductionPane(db);
@@ -56,7 +56,7 @@ public class KrustyGUI {
 		frame.setSize(500, 400);
 		frame.setVisible(true);
 
-		//userLoginPane.displayMessage("Connecting to database ...");
+		productionPane.displayMessage("Connecting to database ...");
 		
 		/* --- change code here --- */
 		/* --- change xxx to your user name, yyy to your password --- */
