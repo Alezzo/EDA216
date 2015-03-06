@@ -17,7 +17,6 @@ public class Database {
 	 * The database connection.
 	 */
 	private Connection conn;
-    //private String test;
 
 	/**
 	 * Create the database interface object. Connection to the database is
