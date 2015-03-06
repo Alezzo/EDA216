@@ -11,6 +11,25 @@ import java.awt.*;
 public class InputPanel extends JPanel {
 	private static final long serialVersionUID = 1;
 
+	private JPanel left, right;
+
+	public InputPanel() {
+
+		left = new JPanel();
+		right = new JPanel();
+		right.setLayout(new GridLayout());
+
+		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+
+		add(left);
+		add(right);
+	}
+
+	public void addComboBox(String label, JComboBox jComboBox) {
+		left.add(new JLabel(label, JLabel.RIGHT));
+		right.add(jComboBox);
+	}
+
 	/**
 	 * Create the panel with the specified fields and labels.
 	 * 
@@ -19,7 +38,7 @@ public class InputPanel extends JPanel {
 	 * @param fields
 	 *            The text fields.
 	 */
-	public InputPanel(String[] texts, JTextField[] fields) {
+	public InputPanel(String[] texts, JComponent[] fields) {
 		JPanel left = new JPanel();
 		left.setLayout(new GridLayout(texts.length, 1));
 		for (int i = 0; i < texts.length; i++) {

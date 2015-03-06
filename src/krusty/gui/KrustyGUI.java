@@ -60,11 +60,11 @@ public class KrustyGUI {
 		
 		/* --- change code here --- */
 		/* --- change xxx to your user name, yyy to your password --- */
-		if (db.openConnection("db129", "kmg335rz")) {
-			productionPane.displayMessage("Connected to database");
-		} else {
-			productionPane.displayMessage("Could not connect to database");
-		}
+		//if (db.openConnection("db129", "kmg335rz")) {
+		//	productionPane.displayMessage("Connected to database");
+		//} else {
+		//	productionPane.displayMessage("Could not connect to database");
+		//}
 	}
 
 	/**

@@ -78,13 +78,13 @@ public class Database {
 
 	/* --- insert own code here --- */
 
-	public ArrayList<String> getCookieNames()
+	public String[] getCookieNames()
 	{
 
 		String sql = "select cookieName " +
 				     "from Cookie ";
 
-		ArrayList<String> cookies = new ArrayList<>();
+		ArrayList<String> cookies = new ArrayList<String>();
 
 		try {
 			Statement statement = conn.createStatement();
@@ -99,7 +99,7 @@ public class Database {
 			e.printStackTrace();
 		}
 
-		return cookies;
+		return cookies.toArray(new String[cookies.size()]);
 	}
 
 }
