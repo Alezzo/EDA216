@@ -8,7 +8,6 @@ import krusty.models.Pallet;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class PalletController {
@@ -30,9 +29,8 @@ public class PalletController {
 	}
 
 	public void resetSearch() {
-		Pallet[] pallets = db.getAllPallets();
 		observableList.clear();
-		observableList.addAll(pallets);
+		observableList.addAll(db.getAllPallets());
 	}
 
 	public void search(String cookieName, LocalDate fromDate, LocalDate toDate) {

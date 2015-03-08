@@ -1,101 +1,46 @@
 package krusty.gui;
 
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 import krusty.Database;
 
-import javax.swing.*;
-import javax.swing.event.*;
-
-import java.awt.*;
-import java.awt.event.*;
-
-/**
- * KrustyGUI is the user interface to the movie database. It sets up the main
- * window and connects to the database.
- */
 public class KrustyGUI {
-	/**
-	 * db is the database object
-	 */
+
+
 	private Database db;
+	private Stage stage;
 
-	/**
-	 * tabbedPane is the contents of the window. It consists of two panes, User
-	 * login and Book tickets.
-	 */
-	private JTabbedPane tabbedPane;
-
-	/**
-	 * Create a GUI object and connect to the database.
-	 * 
-	 * @param db
-	 *            The database.
-	 */
-	public KrustyGUI(Database db) {
+	public KrustyGUI(Database db, Stage stage) {
 		this.db = db;
+		this.stage = stage;
 
-		JFrame frame = new JFrame("Krusty Kookies");
-		tabbedPane = new JTabbedPane();
+		stage.setTitle("Krusty Kookies");
 
-		ProductionPane productionPane = new ProductionPane(db);
-		tabbedPane.addTab("Production panel", null, productionPane);
+		Group root = new Group();
+		Scene scene = new Scene(root, 500, 400, Color.WHITE);
 
-		PalletListPane palletListPane = new PalletListPane(db);
-		tabbedPane.addTab("Pallet list/search", null, palletListPane);
+		TabPane tabPane = new TabPane();
+		tabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
+		BorderPane mainPane = new BorderPane();
 
-		tabbedPane.setSelectedIndex(0);
+		//Create Tabs
+		tabPane.getTabs().add(new PalletListTab(db));
+		tabPane.getTabs().add(new ProductionTab());
 
-		frame.getContentPane().add(tabbedPane, BorderLayout.CENTER);
+		mainPane.setCenter(tabPane);
 
-		tabbedPane.addChangeListener(new ChangeHandler());
-		frame.addWindowListener(new WindowHandler());
+		mainPane.prefHeightProperty().bind(scene.heightProperty());
+		mainPane.prefWidthProperty().bind(scene.widthProperty());
 
-		frame.setSize(500, 400);
-		frame.setVisible(true);
+		root.getChildren().add(mainPane);
+		stage.setScene(scene);
 
-		
-		
-		/* --- change code here --- */
-		/* --- change xxx to your user name, yyy to your password --- */
-		//if (db.openConnection("db129", "kmg335rz")) {
-		//	productionPane.displayMessage("Connected to database");
-		//} else {
-		//	productionPane.displayMessage("Could not connect to database");
-		//}
+		stage.show();
 	}
 
-	/**
-	 * ChangeHandler is a listener class, called when the user switches panes.
-	 */
-	class ChangeHandler implements ChangeListener {
-		/**
-		 * Called when the user switches panes. The entry actions of the new
-		 * pane are performed.
-		 * 
-		 * @param e
-		 *            The change event (not used).
-		 */
-		public void stateChanged(ChangeEvent e) {
-			//BasicPane selectedPane = (BasicPane) tabbedPane
-			//		.getSelectedComponent();
-			//selectedPane.entryActions();
-		}
-	}
-
-	/**
-	 * WindowHandler is a listener class, called when the user exits the
-	 * application.
-	 */
-	class WindowHandler extends WindowAdapter {
-		/**
-		 * Called when the user exits the application. Closes the connection to
-		 * the database.
-		 * 
-		 * @param e
-		 *            The window event (not used).
-		 */
-		public void windowClosing(WindowEvent e) {
-			db.closeConnection();
-			System.exit(0);
-		}
-	}
 }

@@ -1,4 +1,4 @@
-package krusty.gui;
+package krusty.gui.search;
 
 
 import javafx.beans.property.IntegerProperty;
@@ -27,10 +27,11 @@ public class SearchResults extends TableView {
 
 		TableColumn<Pallet, Number> palletId = new TableColumn("#");
 		palletId.setCellValueFactory(cell -> cell.getValue().getPalletId());
-		palletId.setMaxWidth(40);
+		palletId.setPrefWidth(40);
 
 		TableColumn<Pallet, String> cookieName = new TableColumn("Cookie");
 		cookieName.setCellValueFactory(cell -> cell.getValue().getCookieName());
+		cookieName.setPrefWidth(90);
 
 		TableColumn<Pallet, Number> orderId = new TableColumn("Order");
 		orderId.setCellValueFactory(cell -> cell.getValue().getOrderId());

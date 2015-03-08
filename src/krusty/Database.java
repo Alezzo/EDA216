@@ -1,6 +1,5 @@
 package krusty;
 
-import javafx.collections.ObservableList;
 import krusty.models.Pallet;
 import sun.misc.Perf;
 
@@ -103,11 +102,9 @@ public class Database {
 		return cookies.toArray(new String[cookies.size()]);
 	}
 
-	public Pallet[] getAllPallets() {
+	public ArrayList<Pallet> getAllPallets() {
 
-		// TODO: Implement a proper query
-		// Remember to insert some testData in the database first!
-		return new Pallet[] {new Pallet(1, "Cookie", 1, "2015-03-08", "2015-03-28", "i sjukstugan", false), new Pallet(2, "BadCookie", 2, "2015-03-08","2015-04-28", "i sjukstugan", true)};
+		return getPalletsForCookie(null, null, null);
 
 	}
 
@@ -121,13 +118,12 @@ public class Database {
 
 		if (cookieName != null) {
 			sql += " " + andWhere + " cookieName = ?";
+			andWhere = "and";
 		}
-
-
 		if (fromDate != null) {
 			sql += " " + andWhere + " productionDate > ?";
+			andWhere = "and";
 		}
-
 		if (toDate != null) {
 			sql += " " + andWhere + " deliveryDate < ?";
 		}

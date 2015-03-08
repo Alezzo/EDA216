@@ -1,4 +1,4 @@
-package krusty.gui;
+package krusty.gui.search;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -30,7 +30,6 @@ public class SearchBox extends GridPane {
 
 		this.setAlignment(Pos.CENTER);
 		this.setHgap(5);
-		this.setMinHeight(55);
 
 		Label fromDateLabel = new Label("From date");
 		fromDatePicker = new DatePicker();
@@ -60,6 +59,9 @@ public class SearchBox extends GridPane {
 		this.add(cookieLabel, 2, 0);
 		this.add(selectedCookie, 2, 1);
 
+		Button clearButton = new Button("Clear");
+		clearButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new ClearButtonEventHandler());
+		this.add(clearButton, 3, 0);
 
 		Button button = new Button("Search");
 		button.addEventHandler(MouseEvent.MOUSE_CLICKED, new SearchButtonEventHandler());
@@ -71,10 +73,21 @@ public class SearchBox extends GridPane {
 		@Override
 		public void handle(MouseEvent event) {
 			String cookie = selectedCookie.getValue();
-			if (cookie == "Any cookie") {
+			if (cookie.equals("Any cookie")) {
 				cookie = null;
 			}
 			controller.search(cookie, fromDatePicker.getValue(), toDatePicker.getValue());
+		}
+	}
+
+	private class ClearButtonEventHandler implements EventHandler<MouseEvent> {
+		@Override
+		public void handle(MouseEvent event) {
+			selectedCookie.getSelectionModel().select(0);
+			toDatePicker.setValue(null);
+			fromDatePicker.setValue(null);
+
+			controller.resetSearch();
 		}
 	}
 
