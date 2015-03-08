@@ -7,6 +7,7 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import krusty.controllers.CookieController;
 import krusty.controllers.PalletController;
+import krusty.models.Pallet;
 
 import java.time.LocalDate;
 
@@ -75,10 +76,18 @@ public class Form extends GridPane {
 
 	}
 
+	public void setPallet(Pallet pallet) {
+		this.cookieName.setValue(pallet.getCookieName().getValue());
+		this.productionDate.setValue(LocalDate.parse(pallet.getProductionDate().getValue()));
+		this.location.setText(pallet.getLocation().getValue());
+		// TODO: Blocked?
+	}
+
 	private class CreateButtonEventHandler implements EventHandler<ActionEvent> {
 		@Override
 		public void handle(ActionEvent event) {
 			// TODO: Call palletController.create(<data>).
+			// TODO: Also check if the pallet is new or not, possible by setting this.pallet in setPallet, and if null create else update.
 			// Show confirmation and reset form fields, preferable using the cancelButton.
 		}
 	}

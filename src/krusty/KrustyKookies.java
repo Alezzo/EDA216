@@ -13,6 +13,8 @@ import javax.swing.*;
  */
 public class KrustyKookies extends Application {
 
+	public static Stage primaryStage;
+
     public static void main(String[] args) {
         launch();
         //new KrustyGUI(db);
@@ -20,6 +22,8 @@ public class KrustyKookies extends Application {
 
 	@Override
 	public void start(Stage stage) throws Exception {
+		KrustyKookies.primaryStage = stage;
+
 		Database db = new Database();
 
 		if (!db.openConnection("db129", "kmg335rz")) {

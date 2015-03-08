@@ -18,7 +18,7 @@ public class PalletListTab extends Tab {
 		pane.setTop(searchBox);
 		BorderPane.setMargin(searchBox, new Insets(0, 0, 5, 0));
 
-		pane.setCenter(new SearchResults(palletController));
+		pane.setCenter(new SearchResults(palletController, cookieController));
 
 		this.setText("Pallets");
 		this.setContent(pane);
