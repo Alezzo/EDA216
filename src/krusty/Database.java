@@ -133,7 +133,6 @@ public class Database {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		pallets.add(new Pallet(4, "testKaka", 2, "2015-03-08", "2015-03-18", "malmö", true));
 		return pallets;
 
 	}
