@@ -25,20 +25,29 @@ public class SearchResults extends TableView {
 
 	private void init() {
 
-		TableColumn<Pallet, Number> id = new TableColumn("#");
-		id.setCellValueFactory(cell -> cell.getValue().getId());
-		id.setMaxWidth(40);
+		TableColumn<Pallet, Number> palletId = new TableColumn("#");
+		palletId.setCellValueFactory(cell -> cell.getValue().getPalletId());
+		palletId.setMaxWidth(40);
 
 		TableColumn<Pallet, String> cookieName = new TableColumn("Cookie");
 		cookieName.setCellValueFactory(cell -> cell.getValue().getCookieName());
 
-		TableColumn order = new TableColumn("Order");
-		TableColumn productionDate = new TableColumn("Production");
-		TableColumn deliveryDate = new TableColumn("Delivery");
-		TableColumn blocked = new TableColumn("Blocked?");
-		TableColumn location = new TableColumn("Location");
+		TableColumn<Pallet, Number> orderId = new TableColumn("Order");
+		orderId.setCellValueFactory(cell -> cell.getValue().getOrderId());
+		
+		TableColumn<Pallet, String> productionDate = new TableColumn("Production");
+		productionDate.setCellValueFactory(cell -> cell.getValue().getProductionDate());
+		
+		TableColumn<Pallet, String> deliveryDate = new TableColumn("Delivery");
+		deliveryDate.setCellValueFactory(cell -> cell.getValue().getDeliveryDate());
+		
+		TableColumn<Pallet, String> location = new TableColumn("Location");
+		location.setCellValueFactory(cell -> cell.getValue().getLocation());
+		
+		TableColumn<Pallet, String> isBlocked = new TableColumn("Blocked?");
+		isBlocked.setCellValueFactory(cell -> cell.getValue().isBlocked());
 
-		getColumns().addAll(id, cookieName, order, productionDate, deliveryDate, blocked, location);
+		getColumns().addAll(palletId, cookieName, orderId, productionDate, deliveryDate, location, isBlocked);
 
 		setItems(controller.getObservableList());
 

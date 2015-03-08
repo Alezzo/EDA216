@@ -33,9 +33,10 @@ public class PalletController {
 		observableList.addAll(pallets);
 	}
 
-	public void search() {
+	public void search(String cookieName, String fromDate, String toDate) {
+		
 		// TODO: Implement search to db, should update observableList..
-		observableList.add(new Pallet(4, "Test search"));
+		observableList.addAll(db.getPalletsForCookie(cookieName, fromDate, toDate));
 	}
 
 }

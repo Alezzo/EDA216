@@ -6,8 +6,6 @@ import sun.misc.Perf;
 
 import java.lang.String;
 import java.sql.*;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -108,7 +106,35 @@ public class Database {
 
 		// TODO: Implement a proper query
 		// Remember to insert some testData in the database first!
-		return new Pallet[] {new Pallet(1, "Cookie"), new Pallet(2, "Candy crush")};
+		return new Pallet[] {new Pallet(1, "Cookie", 1, "2015-03-08", "2015-03-28", "i sjukstugan", false), new Pallet(2, "BadCookie", 2, "2015-03-08","2015-04-28", "i sjukstugan", true)};
+
+	}
+	
+	
+	public ArrayList<Pallet> getPalletsForCookie(String cookieName, String fromDate, String toDate) {
+
+		String sql = "select palletId, cookieName, orderId, productionDate, deliveryDate, location, isBlocked " +
+				"from Pallet " +
+				"where cookieName = ?";
+
+		ArrayList<Pallet> pallets = new ArrayList<>();
+
+		try {
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, cookieName);
+
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next())
+			{
+				pallets.add(new Pallet(rs.getInt("palletId"), rs.getString("cookieName"), rs.getInt("orderId"), rs.getString("productionDate"), rs.getString("deliveryDate"), rs.getString("location"), rs.getBoolean("isBlocked")));
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		pallets.add(new Pallet(4, "testKaka", 2, "2015-03-08", "2015-03-18", "malmö", true));
+		return pallets;
 
 	}
 }

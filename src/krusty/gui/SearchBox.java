@@ -18,7 +18,9 @@ public class SearchBox extends GridPane {
 
 	private Database db;
 	private PalletController controller;
-
+	private ComboBox selectedCookie;
+	private DatePicker fromDatePicker;
+	private DatePicker toDatePicker;
 
 	public SearchBox(Database db, PalletController controller) {
 		this.db = db;
@@ -34,14 +36,14 @@ public class SearchBox extends GridPane {
 		this.setMinHeight(55);
 
 		Label fromDateLabel = new Label("From date");
-		DatePicker fromDatePicker = new DatePicker();
+		fromDatePicker = new DatePicker();
 		fromDatePicker.setMaxSize(120, 40);
 
 		this.add(fromDateLabel, 0, 0);
 		this.add(fromDatePicker, 0, 1);
 
 		Label toDateLabel = new Label("To date");
-		DatePicker toDatePicker = new DatePicker();
+		toDatePicker = new DatePicker();
 		toDatePicker.setMaxSize(120, 40);
 
 		this.add(toDateLabel, 1, 0);
@@ -54,11 +56,12 @@ public class SearchBox extends GridPane {
 		ObservableList obList = FXCollections.observableArrayList(cookies);
 		obList.add(0, "Any cookie");
 
-		ComboBox cookieName = new ComboBox(obList);
-		cookieName.getSelectionModel().select("Any cookie");
+		selectedCookie = new ComboBox(obList);
+		selectedCookie.getSelectionModel().select("Any cookie");
+		
 
 		this.add(cookieLabel, 2, 0);
-		this.add(cookieName, 2, 1);
+		this.add(selectedCookie, 2, 1);
 
 
 		Button button = new Button("Search");
@@ -70,7 +73,7 @@ public class SearchBox extends GridPane {
 	private class SearchButtonEventHandler implements EventHandler<MouseEvent> {
 		@Override
 		public void handle(MouseEvent event) {
-			controller.search();
+			controller.search(selectedCookie.getValue().toString(), fromDatePicker.getValue().toString(), toDatePicker.getValue().toString());
 		}
 	}
 
