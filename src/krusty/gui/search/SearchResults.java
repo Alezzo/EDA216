@@ -1,12 +1,8 @@
 package krusty.gui.search;
 
 
-import javafx.beans.property.IntegerProperty;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
-import krusty.Database;
 import krusty.controllers.PalletController;
 import krusty.models.Pallet;
 

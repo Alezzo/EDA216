@@ -3,7 +3,6 @@ package krusty.gui;
 import javafx.geometry.Insets;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.BorderPane;
-import krusty.Database;
 import krusty.controllers.CookieController;
 import krusty.controllers.PalletController;
 import krusty.gui.search.SearchBox;

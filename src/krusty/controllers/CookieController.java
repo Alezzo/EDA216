@@ -3,7 +3,6 @@ package krusty.controllers;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import krusty.Database;
-import krusty.models.Pallet;
 
 import java.util.ArrayList;
 import java.util.List;

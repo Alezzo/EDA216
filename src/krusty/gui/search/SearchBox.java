@@ -2,12 +2,11 @@ package krusty.gui.search;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-import krusty.Database;
 import krusty.controllers.CookieController;
 import krusty.controllers.PalletController;
 
@@ -67,18 +66,20 @@ public class SearchBox extends GridPane {
 		this.add(isBlocked, 3, 1);
 
 		Button clearButton = new Button("Clear");
-		clearButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new ClearButtonEventHandler());
+		clearButton.setCancelButton(true);
+		clearButton.setOnAction(new ClearButtonEventHandler());
 		this.add(clearButton, 4, 0);
 
 		Button button = new Button("Search");
-		button.addEventHandler(MouseEvent.MOUSE_CLICKED, new SearchButtonEventHandler());
+		button.setDefaultButton(true);
+		button.setOnAction(new SearchButtonEventHandler());
 		this.add(button, 4, 1);
 
 	}
 
-	private class SearchButtonEventHandler implements EventHandler<MouseEvent> {
+	private class SearchButtonEventHandler implements EventHandler<ActionEvent> {
 		@Override
-		public void handle(MouseEvent event) {
+		public void handle(ActionEvent event) {
 			String cookie = selectedCookie.getValue();
 			if (cookie.equals("Any cookie")) {
 				cookie = null;
@@ -87,9 +88,9 @@ public class SearchBox extends GridPane {
 		}
 	}
 
-	private class ClearButtonEventHandler implements EventHandler<MouseEvent> {
+	private class ClearButtonEventHandler implements EventHandler<ActionEvent> {
 		@Override
-		public void handle(MouseEvent event) {
+		public void handle(ActionEvent event) {
 			selectedCookie.getSelectionModel().select(0);
 			toDatePicker.setValue(null);
 			fromDatePicker.setValue(null);
