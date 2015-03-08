@@ -4,17 +4,17 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.BorderPane;
 import krusty.Database;
+import krusty.controllers.CookieController;
 import krusty.controllers.PalletController;
 import krusty.gui.search.SearchBox;
 import krusty.gui.search.SearchResults;
 
 public class PalletListTab extends Tab {
 
-	public PalletListTab(Database db) {
+	public PalletListTab(PalletController palletController, CookieController cookieController) {
 
 		BorderPane pane = new BorderPane();
-		PalletController palletController = new PalletController(db);
-		SearchBox searchBox = new SearchBox(db, palletController);
+		SearchBox searchBox = new SearchBox(palletController, cookieController);
 
 		pane.setTop(searchBox);
 		BorderPane.setMargin(searchBox, new Insets(0, 0, 5, 0));
@@ -24,6 +24,4 @@ public class PalletListTab extends Tab {
 		this.setText("Pallets");
 		this.setContent(pane);
 	}
-
-
 }

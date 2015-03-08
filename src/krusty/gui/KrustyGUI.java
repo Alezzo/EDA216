@@ -8,6 +8,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import krusty.Database;
+import krusty.controllers.CookieController;
+import krusty.controllers.PalletController;
 
 public class KrustyGUI {
 
@@ -28,9 +30,12 @@ public class KrustyGUI {
 		tabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
 		BorderPane mainPane = new BorderPane();
 
+		CookieController cookieController = new CookieController(db);
+		PalletController palletController = new PalletController(db);
+
 		//Create Tabs
-		tabPane.getTabs().add(new PalletListTab(db));
-		tabPane.getTabs().add(new ProductionTab());
+		tabPane.getTabs().add(new PalletListTab(palletController, cookieController));
+		tabPane.getTabs().add(new ProductionTab(palletController, cookieController));
 
 		mainPane.setCenter(tabPane);
 

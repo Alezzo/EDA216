@@ -8,20 +8,23 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import krusty.Database;
+import krusty.controllers.CookieController;
 import krusty.controllers.PalletController;
 
 
 public class SearchBox extends GridPane {
 
-	private Database db;
-	private PalletController controller;
+	private PalletController palletController;
+	private CookieController cookieController;
+
 	private ComboBox<String> selectedCookie;
 	private DatePicker fromDatePicker;
 	private DatePicker toDatePicker;
+	private CheckBox isBlocked;
 
-	public SearchBox(Database db, PalletController controller) {
-		this.db = db;
-		this.controller = controller;
+	public SearchBox(PalletController palletController, CookieController cookieController) {
+		this.palletController = palletController;
+		this.cookieController = cookieController;
 
 		init();
 	}
@@ -33,14 +36,14 @@ public class SearchBox extends GridPane {
 
 		Label fromDateLabel = new Label("From date");
 		fromDatePicker = new DatePicker();
-		fromDatePicker.setMaxSize(120, 40);
+		fromDatePicker.setMaxSize(110, 40);
 
 		this.add(fromDateLabel, 0, 0);
 		this.add(fromDatePicker, 0, 1);
 
 		Label toDateLabel = new Label("To date");
 		toDatePicker = new DatePicker();
-		toDatePicker.setMaxSize(120, 40);
+		toDatePicker.setMaxSize(110, 40);
 
 		this.add(toDateLabel, 1, 0);
 		this.add(toDatePicker, 1, 1);
@@ -48,24 +51,28 @@ public class SearchBox extends GridPane {
 
 		Label cookieLabel = new Label("Cookie");
 
-		String cookies[] = db.getCookieNames();
-		ObservableList<String> obList = FXCollections.observableArrayList(cookies);
+		ObservableList<String> obList = FXCollections.observableArrayList(cookieController.getObservableList());
 		obList.add(0, "Any cookie");
 
 		selectedCookie = new ComboBox<String>(obList);
 		selectedCookie.getSelectionModel().select("Any cookie");
-		
 
 		this.add(cookieLabel, 2, 0);
 		this.add(selectedCookie, 2, 1);
 
+		Label isBlockedLabel = new Label("Blocked");
+		isBlocked = new CheckBox();
+
+		this.add(isBlockedLabel, 3, 0);
+		this.add(isBlocked, 3, 1);
+
 		Button clearButton = new Button("Clear");
 		clearButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new ClearButtonEventHandler());
-		this.add(clearButton, 3, 0);
+		this.add(clearButton, 4, 0);
 
 		Button button = new Button("Search");
 		button.addEventHandler(MouseEvent.MOUSE_CLICKED, new SearchButtonEventHandler());
-		this.add(button, 3, 1);
+		this.add(button, 4, 1);
 
 	}
 
@@ -76,7 +83,7 @@ public class SearchBox extends GridPane {
 			if (cookie.equals("Any cookie")) {
 				cookie = null;
 			}
-			controller.search(cookie, fromDatePicker.getValue(), toDatePicker.getValue());
+			palletController.search(cookie, fromDatePicker.getValue(), toDatePicker.getValue());
 		}
 	}
 
@@ -87,7 +94,7 @@ public class SearchBox extends GridPane {
 			toDatePicker.setValue(null);
 			fromDatePicker.setValue(null);
 
-			controller.resetSearch();
+			palletController.resetSearch();
 		}
 	}
 
