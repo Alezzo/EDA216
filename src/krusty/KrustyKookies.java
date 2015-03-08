@@ -19,6 +19,8 @@ public class KrustyKookies {
 	    if (db.openConnection("db129", "kmg335rz")) {
 		    //productionPane.displayMessage("Connected to database");
 	    } else {
+		    JOptionPane.showMessageDialog(null, "Unable to connect to the database!");
+		    System.exit(0);
 		    //productionPane.displayMessage("Could not connect to database");
 	    }
 
