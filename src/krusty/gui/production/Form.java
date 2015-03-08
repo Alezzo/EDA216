@@ -1,5 +1,7 @@
 package krusty.gui.production;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.control.*;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -12,6 +14,11 @@ public class Form extends GridPane {
 
 	private final PalletController palletController;
 	private final CookieController cookieController;
+
+	private ComboBox<String> cookieName;
+	private DatePicker productionDate;
+	private TextField location;
+	private CheckBox blocked;
 
 	public Form(PalletController palletController, CookieController cookieController) {
 		this.palletController = palletController;
@@ -31,13 +38,13 @@ public class Form extends GridPane {
 
 		Label l = new Label("Cookie:");
 
-		ComboBox cookieName = new ComboBox<String>(cookieController.getObservableList());
+		cookieName = new ComboBox<String>(cookieController.getObservableList());
 
 		this.add(l, 0, 0);
 		this.add(cookieName, 1, 0);
 
 		l = new Label("Production date:");
-		DatePicker productionDate = new DatePicker();
+		productionDate = new DatePicker();
 		productionDate.setMaxSize(110, 40);
 		productionDate.setValue(LocalDate.now());
 
@@ -45,13 +52,13 @@ public class Form extends GridPane {
 		this.add(productionDate, 1, 1);
 
 		l = new Label("Location:");
-		TextField location = new TextField();
+		location = new TextField();
 
 		this.add(l, 0, 2);
 		this.add(location, 1, 2);
 
 		l = new Label("Blocked:");
-		CheckBox blocked = new CheckBox();
+		blocked = new CheckBox();
 
 		this.add(l, 0, 3);
 		this.add(blocked, 1, 3);
@@ -66,10 +73,14 @@ public class Form extends GridPane {
 		//cancelButton.setOnAction(new ClearButtonEventHandler());
 		this.add(cancelButton, 0, 10);
 
-
-
 	}
 
-
+	private class CreateButtonEventHandler implements EventHandler<ActionEvent> {
+		@Override
+		public void handle(ActionEvent event) {
+			// TODO: Call palletController.create(<data>).
+			// Show confirmation and reset form fields, preferable using the cancelButton.
+		}
+	}
 
 }

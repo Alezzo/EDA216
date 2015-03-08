@@ -11,8 +11,6 @@ public class SearchResults extends TableView {
 
 	private PalletController controller;
 
-	private TableView table = new TableView();
-
 	public SearchResults(PalletController controller) {
 		this.controller = controller;
 
@@ -20,6 +18,8 @@ public class SearchResults extends TableView {
 	}
 
 	private void init() {
+
+		
 
 		TableColumn<Pallet, Number> palletId = new TableColumn("#");
 		palletId.setCellValueFactory(cell -> cell.getValue().getPalletId());
