@@ -1,12 +1,9 @@
 package krusty.gui;
 
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.embed.swing.JFXPanel;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
@@ -18,7 +15,7 @@ public class SearchBox extends GridPane {
 
 	private Database db;
 	private PalletController controller;
-	private ComboBox selectedCookie;
+	private ComboBox<String> selectedCookie;
 	private DatePicker fromDatePicker;
 	private DatePicker toDatePicker;
 
@@ -53,10 +50,10 @@ public class SearchBox extends GridPane {
 		Label cookieLabel = new Label("Cookie");
 
 		String cookies[] = db.getCookieNames();
-		ObservableList obList = FXCollections.observableArrayList(cookies);
+		ObservableList<String> obList = FXCollections.observableArrayList(cookies);
 		obList.add(0, "Any cookie");
 
-		selectedCookie = new ComboBox(obList);
+		selectedCookie = new ComboBox<String>(obList);
 		selectedCookie.getSelectionModel().select("Any cookie");
 		
 
@@ -73,7 +70,8 @@ public class SearchBox extends GridPane {
 	private class SearchButtonEventHandler implements EventHandler<MouseEvent> {
 		@Override
 		public void handle(MouseEvent event) {
-			controller.search(selectedCookie.getValue().toString(), fromDatePicker.getValue().toString(), toDatePicker.getValue().toString());
+			System.out.println(selectedCookie.getValue());
+			controller.search(selectedCookie.getValue(), fromDatePicker.getValue(), toDatePicker.getValue());
 		}
 	}
 

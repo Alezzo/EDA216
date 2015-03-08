@@ -6,6 +6,7 @@ import sun.misc.Perf;
 
 import java.lang.String;
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
@@ -29,7 +30,7 @@ public class Database {
 	/**
 	 * Open a connection to the database, using the specified user name and
 	 * password.
-	 * 
+	 *
 	 * @param userName
 	 *            The user name.
 	 * @param password
@@ -69,7 +70,7 @@ public class Database {
 
 	/**
 	 * Check if the connection to the database has been established
-	 * 
+	 *
 	 * @return true if the connection has been established
 	 */
 	public boolean isConnected() {
@@ -82,7 +83,7 @@ public class Database {
 	{
 
 		String sql = "select cookieName " +
-				     "from Cookie ";
+				"from Cookie ";
 
 		ArrayList<String> cookies = new ArrayList<String>();
 
@@ -109,19 +110,35 @@ public class Database {
 		return new Pallet[] {new Pallet(1, "Cookie", 1, "2015-03-08", "2015-03-28", "i sjukstugan", false), new Pallet(2, "BadCookie", 2, "2015-03-08","2015-04-28", "i sjukstugan", true)};
 
 	}
-	
-	
-	public ArrayList<Pallet> getPalletsForCookie(String cookieName, String fromDate, String toDate) {
+
+
+	public ArrayList<Pallet> getPalletsForCookie(String cookieName, LocalDate fromDate, LocalDate toDate) {
 
 		String sql = "select palletId, cookieName, orderId, productionDate, deliveryDate, location, isBlocked " +
 				"from Pallet " +
 				"where cookieName = ?";
+
+		if (fromDate != null) {
+			sql += " and productionDate > ?";
+		}
+
+		if (toDate != null) {
+			sql += " and deliveryDate < ?";
+		}
 
 		ArrayList<Pallet> pallets = new ArrayList<>();
 
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, cookieName);
+
+			int i = 2;
+			if (fromDate != null) {
+				ps.setString(i++, fromDate.toString());
+			}
+			if (toDate != null) {
+				ps.setString(i++, toDate.toString());
+			}
 
 			ResultSet rs = ps.executeQuery();
 
