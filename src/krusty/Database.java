@@ -115,24 +115,33 @@ public class Database {
 	public ArrayList<Pallet> getPalletsForCookie(String cookieName, LocalDate fromDate, LocalDate toDate) {
 
 		String sql = "select palletId, cookieName, orderId, productionDate, deliveryDate, location, isBlocked " +
-				"from Pallet " +
-				"where cookieName = ?";
+				"from Pallet";
+
+		String andWhere = "where";
+
+		if (cookieName != null) {
+			sql += " " + andWhere + " cookieName = ?";
+		}
+
 
 		if (fromDate != null) {
-			sql += " and productionDate > ?";
+			sql += " " + andWhere + " productionDate > ?";
 		}
 
 		if (toDate != null) {
-			sql += " and deliveryDate < ?";
+			sql += " " + andWhere + " deliveryDate < ?";
 		}
 
 		ArrayList<Pallet> pallets = new ArrayList<>();
 
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setString(1, cookieName);
 
-			int i = 2;
+			int i = 1;
+
+			if (cookieName != null) {
+				ps.setString(i++, cookieName);
+			}
 			if (fromDate != null) {
 				ps.setString(i++, fromDate.toString());
 			}

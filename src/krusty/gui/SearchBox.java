@@ -70,8 +70,11 @@ public class SearchBox extends GridPane {
 	private class SearchButtonEventHandler implements EventHandler<MouseEvent> {
 		@Override
 		public void handle(MouseEvent event) {
-			System.out.println(selectedCookie.getValue());
-			controller.search(selectedCookie.getValue(), fromDatePicker.getValue(), toDatePicker.getValue());
+			String cookie = selectedCookie.getValue();
+			if (cookie == "Any cookie") {
+				cookie = null;
+			}
+			controller.search(cookie, fromDatePicker.getValue(), toDatePicker.getValue());
 		}
 	}
 

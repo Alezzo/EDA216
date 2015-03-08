@@ -31,13 +31,12 @@ public class PalletController {
 
 	public void resetSearch() {
 		Pallet[] pallets = db.getAllPallets();
-		observableList.removeAll();
+		observableList.clear();
 		observableList.addAll(pallets);
 	}
 
 	public void search(String cookieName, LocalDate fromDate, LocalDate toDate) {
-
-				// TODO: Implement search to db, should update observableList..
+		observableList.clear();
 		observableList.addAll(db.getPalletsForCookie(cookieName, fromDate, toDate));
 	}
 
