@@ -52,7 +52,7 @@ public class KrustyGUI {
 		frame.setSize(500, 400);
 		frame.setVisible(true);
 
-		productionPane.displayMessage("Connecting to database ...");
+		
 		
 		/* --- change code here --- */
 		/* --- change xxx to your user name, yyy to your password --- */
