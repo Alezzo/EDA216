@@ -22,6 +22,11 @@ public class Form extends GridPane {
 	private TextField location;
 	private CheckBox blocked;
 
+	private Button saveButton;
+	private Button cancelButton;
+
+	private Pallet pallet = null;
+
 	public Form(PalletController palletController, CookieController cookieController) {
 		this.palletController = palletController;
 		this.cookieController = cookieController;
@@ -51,7 +56,7 @@ public class Form extends GridPane {
 		l = new Label("Production date:");
 		productionDate = new DatePicker();
 		productionDate.setMaxSize(110, 40);
-		//productionDate.setValue(LocalDate.now());
+		productionDate.setValue(LocalDate.now());
 
 		this.add(l, 0, 1);
 		this.add(productionDate, 1, 1);
@@ -68,12 +73,12 @@ public class Form extends GridPane {
 		this.add(l, 0, 3);
 		this.add(blocked, 1, 3);
 
-		Button button = new Button("Create");
-		button.setDefaultButton(true);
-		button.setOnAction(new CreateButtonEventHandler());
-		this.add(button, 1, 10);
+		saveButton = new Button("Create");
+		saveButton.setDefaultButton(true);
+		saveButton.setOnAction(new CreateButtonEventHandler());
+		this.add(saveButton, 1, 10);
 
-		Button cancelButton = new Button("Cancel");
+		cancelButton = new Button("Cancel");
 		cancelButton.setCancelButton(true);
 		cancelButton.setOnAction(new ClearButtonEventHandler());
 		this.add(cancelButton, 0, 10);
@@ -81,6 +86,9 @@ public class Form extends GridPane {
 	}
 
 	public void setPallet(Pallet pallet) {
+		this.pallet = pallet;
+		saveButton.setText("Update");
+
 		this.cookieName.setValue(pallet.getCookieName().getValue());
 		this.productionDate.setValue(LocalDate.parse(pallet.getProductionDate().getValue()));
 		this.location.setText(pallet.getLocation().getValue());
@@ -90,9 +98,14 @@ public class Form extends GridPane {
 	private class CreateButtonEventHandler implements EventHandler<ActionEvent> {
 		@Override
 		public void handle(ActionEvent event) {
-           if (palletController.create(cookieName.getValue(), productionDate.getValue(), location.getText())){
-               JOptionPane.showConfirmDialog(null, "The creation was completed");
-            }
+
+			if (pallet == null) {
+				if (palletController.create(cookieName.getValue(), productionDate.getValue(), location.getText())){
+					JOptionPane.showConfirmDialog(null, "The creation was completed");
+				}
+			} else {
+				// TODO: Update!
+			}
 
 			// TODO: Call palletController.create(<data>).
 			// TODO: Also check if the pallet is new or not, possible by setting this.pallet in setPallet, and if null create else update.
