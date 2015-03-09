@@ -188,11 +188,11 @@ public class Database {
 
             for (String ingredient : ingredients) {
                 ps = conn.prepareStatement(updateSQL);
-                ps.setString(1, ingredient);
 
                 ResultSet rs2 = ps.executeQuery();
 
-                ps.setInt(2, rs2.getInt("amount"));
+                ps.setInt(1, rs2.getInt("amount"));
+                ps.setString(2, ingredient);
             }
 
             ps = conn.prepareStatement(insertSQL);
