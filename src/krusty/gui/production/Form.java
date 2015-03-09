@@ -43,8 +43,8 @@ public class Form extends GridPane {
 
 		cookieName = new ComboBox<String>(cookieController.getObservableList());
 
-        cookieController.getObservableList().add(0, "Any cookie");
-        cookieName.getSelectionModel().select("Any cookie");
+        cookieController.getObservableList().add(0, "Choose a cookie");
+        cookieName.getSelectionModel().select("Choose a cookie");
 
 		this.add(l, 0, 0);
 		this.add(cookieName, 1, 0);
@@ -52,7 +52,7 @@ public class Form extends GridPane {
 		l = new Label("Production date:");
 		productionDate = new DatePicker();
 		productionDate.setMaxSize(110, 40);
-		productionDate.setValue(LocalDate.now());
+		//productionDate.setValue(LocalDate.now());
 
 		this.add(l, 0, 1);
 		this.add(productionDate, 1, 1);
@@ -105,6 +105,7 @@ public class Form extends GridPane {
         @Override
         public void handle(ActionEvent event) {
             cookieName.getSelectionModel().select(0);
+            //productionDate.setValue(LocalDate.now());
             productionDate.setValue(null);
             location.setText("");
             blocked.setSelected(false);

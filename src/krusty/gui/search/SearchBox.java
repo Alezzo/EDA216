@@ -51,10 +51,10 @@ public class SearchBox extends GridPane {
 		Label cookieLabel = new Label("Cookie");
 
 		ObservableList<String> obList = FXCollections.observableArrayList(cookieController.getObservableList());
-		obList.add(0, "Any cookie");
+		obList.add(0, "Choose a cookie");
 
 		selectedCookie = new ComboBox<String>(obList);
-		selectedCookie.getSelectionModel().select("Any cookie");
+		selectedCookie.getSelectionModel().select("Choose a cookie");
 
 		this.add(cookieLabel, 2, 0);
 		this.add(selectedCookie, 2, 1);
@@ -81,7 +81,7 @@ public class SearchBox extends GridPane {
 		@Override
 		public void handle(ActionEvent event) {
 			String cookie = selectedCookie.getValue();
-			if (cookie.equals("Any cookie")) {
+			if (cookie.equals("Choose a cookie")) {
 				cookie = null;
 			}
 			palletController.search(cookie, fromDatePicker.getValue(), toDatePicker.getValue());
