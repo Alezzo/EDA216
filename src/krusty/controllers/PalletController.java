@@ -43,11 +43,11 @@ public class PalletController {
 		observableList.addAll(db.getPalletsForCookie(cookieName, fromDate, toDate));
 	}
 
-    public void create(String cookieName, LocalDate productionDate, String location) {
+    public boolean create(String cookieName, LocalDate productionDate, String location) {
         if(db.createNewPallet(cookieName, productionDate, location)) {
-            //Show confirmation
+            return true;
         } else {
-            //Show failure message
+            return false;
         }
     }
 }

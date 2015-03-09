@@ -9,6 +9,7 @@ import krusty.controllers.CookieController;
 import krusty.controllers.PalletController;
 import krusty.models.Pallet;
 
+import javax.swing.*;
 import java.time.LocalDate;
 
 public class Form extends GridPane {
@@ -86,7 +87,9 @@ public class Form extends GridPane {
 	private class CreateButtonEventHandler implements EventHandler<ActionEvent> {
 		@Override
 		public void handle(ActionEvent event) {
-            palletController.create(cookieName.getValue(), productionDate.getValue(), location.getText().toString());
+           if (palletController.create(cookieName.getValue(), productionDate.getValue(), location.getText().toString())){
+               JOptionPane.showConfirmDialog(null, "The creation was completed");
+            }
 
 			// TODO: Call palletController.create(<data>).
 			// TODO: Also check if the pallet is new or not, possible by setting this.pallet in setPallet, and if null create else update.

@@ -161,7 +161,7 @@ public class Database {
 
     public boolean createNewPallet(String cookieName, LocalDate productionDate, String location) {
         String insertSQL = "insert into Pallet" +
-                "values (NULL, ?, NULL, ?, ?, 0, NULL)";
+                "values (?, ?, ?)";
 
         PreparedStatement ps = null;
 
