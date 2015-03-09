@@ -34,7 +34,6 @@ public class EditForm extends GridPane {
 		this.pallet = pallet;
 		this.modal = modal;
 
-		//this.setMaxSize(200, 200);
 		this.setVgap(5);
 
 		ColumnConstraints col1 = new ColumnConstraints();
@@ -49,9 +48,7 @@ public class EditForm extends GridPane {
 		Label l = new Label("Cookie:");
 
 		cookieName = new ComboBox<String>(cookieController.getObservableList());
-
-        cookieController.getObservableList().add(0, "Choose a cookie");
-        cookieName.getSelectionModel().select("Choose a cookie");
+        cookieName.getSelectionModel().select(pallet.getCookieName().getValue());
 
 		this.add(l, 0, 0);
 		this.add(cookieName, 1, 0);
@@ -59,13 +56,17 @@ public class EditForm extends GridPane {
 		l = new Label("Production date:");
 		productionDate = new DatePicker();
 		productionDate.setMaxSize(110, 40);
-		productionDate.setValue(LocalDate.now());
+		if (pallet.getProductionDate().getValue() != null) {
+			productionDate.setValue(LocalDate.parse(pallet.getProductionDate().getValue()));
+		}
+
 
 		this.add(l, 0, 1);
 		this.add(productionDate, 1, 1);
 
 		l = new Label("Location:");
 		location = new TextField();
+		location.setText(pallet.getLocation().getValue());
 
 		this.add(l, 0, 2);
 		this.add(location, 1, 2);
@@ -76,9 +77,9 @@ public class EditForm extends GridPane {
 		this.add(l, 0, 3);
 		this.add(blocked, 1, 3);
 
-		saveButton = new Button("Create");
+		saveButton = new Button("Update");
 		saveButton.setDefaultButton(true);
-		saveButton.setOnAction(new CreateButtonEventHandler());
+		saveButton.setOnAction(new UpdateButtonEventHandler());
 		this.add(saveButton, 1, 10);
 
 		cancelButton = new Button("Cancel");
@@ -88,7 +89,7 @@ public class EditForm extends GridPane {
 
 	}
 
-	private class CreateButtonEventHandler implements EventHandler<ActionEvent> {
+	private class UpdateButtonEventHandler implements EventHandler<ActionEvent> {
 		@Override
 		public void handle(ActionEvent event) {
 
