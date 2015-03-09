@@ -1,6 +1,5 @@
 package krusty.gui.production;
 
-import com.sun.codemodel.internal.JOp;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.*;
