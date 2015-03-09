@@ -160,6 +160,14 @@ public class Database {
 	}
 
     public boolean createNewPallet(String cookieName, LocalDate productionDate, String location) {
+        String selectSQL = "select ingredientName, amount" +
+                "from cookie_ingredient" +
+                "where cookieName = ?";
+
+        String updateSQL = "update ingredient_storage" +
+                "set amount = amount - ?" +
+                "where ingredient_name = ?";
+
         String insertSQL = "insert into Pallet" +
                 "(cookieName, productionDate, location)" +
                 "values (?, ?, ?)";
@@ -167,6 +175,26 @@ public class Database {
         PreparedStatement ps = null;
 
         try {
+            ps = conn.prepareStatement(selectSQL);
+            ps.setString(1, cookieName);
+
+            ArrayList<String> ingredients = new ArrayList<>();
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                ingredients.add(rs.getString("ingredientName"));
+            }
+
+            for (String ingredient : ingredients) {
+                ps = conn.prepareStatement(updateSQL);
+                ps.setString(1, ingredient);
+
+                ResultSet rs2 = ps.executeQuery();
+
+                ps.setInt(2, rs2.getInt("amount"));
+            }
+
             ps = conn.prepareStatement(insertSQL);
 
 	        ps.setString(1, cookieName);
@@ -188,5 +216,9 @@ public class Database {
             }
         }
         return false;
+    }
+
+    private void updateStorage() {
+
     }
 }
