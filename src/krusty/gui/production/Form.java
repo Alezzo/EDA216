@@ -86,10 +86,22 @@ public class Form extends GridPane {
 	private class CreateButtonEventHandler implements EventHandler<ActionEvent> {
 		@Override
 		public void handle(ActionEvent event) {
+            palletController.create(cookieName.getValue(), productionDate.getValue(), location.toString());
+
 			// TODO: Call palletController.create(<data>).
 			// TODO: Also check if the pallet is new or not, possible by setting this.pallet in setPallet, and if null create else update.
 			// Show confirmation and reset form fields, preferable using the cancelButton.
 		}
 	}
+
+    private class ClearButtonEventHandler implements EventHandler<ActionEvent> {
+        @Override
+        public void handle(ActionEvent event) {
+            cookieName.getSelectionModel().select(0);
+            productionDate.setValue(null);
+            location.setText("");
+            blocked.setSelected(false);
+        }
+    }
 
 }

@@ -158,4 +158,9 @@ public class Database {
 		return pallets;
 
 	}
+
+    public boolean createNewPallet(String cookieName, LocalDate productionDate, String location) {
+
+        return false;
+    }
 }

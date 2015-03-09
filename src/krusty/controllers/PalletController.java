@@ -3,6 +3,10 @@ package krusty.controllers;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.TextField;
 import krusty.Database;
 import krusty.models.Pallet;
 
@@ -39,4 +43,11 @@ public class PalletController {
 		observableList.addAll(db.getPalletsForCookie(cookieName, fromDate, toDate));
 	}
 
+    public void create(String cookieName, LocalDate productionDate, String location) {
+        if(db.createNewPallet(cookieName, productionDate, location)) {
+            //Show confirmation
+        } else {
+            //Show failure message
+        }
+    }
 }
