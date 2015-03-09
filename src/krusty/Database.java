@@ -165,7 +165,7 @@ public class Database {
                 "where cookieName = ?";
 
         String updateSQL = "update ingredient_storage " +
-                "set amount = amount - ? " +
+                "set amountLeft = amountLeft - ? " +
                 "where ingredientName = ?";
 
         String insertSQL = "insert into Pallet " +
