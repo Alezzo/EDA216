@@ -32,17 +32,7 @@ public class SearchResults extends TableView {
 			TableRow<Pallet> row = new TableRow<>();
 			row.setOnMouseClicked(event -> {
 				if (event.getClickCount() == 2 && (!row.isEmpty())) {
-
-					// Create the dialog Stage.
-					Stage dialogStage = new Stage();
-					dialogStage.setTitle("Edit pallet");
-					dialogStage.initModality(Modality.WINDOW_MODAL);
-					dialogStage.initOwner(KrustyKookies.primaryStage);
-					Scene scene = new Scene(new Modal(palletController, cookieController, row.getItem()), 300, 200);
-					dialogStage.setScene(scene);
-
-					// Show the dialog and wait until the user closes it
-					dialogStage.showAndWait();
+					new Modal(palletController, cookieController, row.getItem());
 				}
 			});
 			return row;
