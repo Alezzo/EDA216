@@ -9,6 +9,7 @@ import krusty.controllers.CookieController;
 import krusty.controllers.PalletController;
 import krusty.models.Pallet;
 
+import javax.swing.*;
 import java.time.LocalDate;
 
 public class EditForm extends GridPane {
@@ -16,6 +17,7 @@ public class EditForm extends GridPane {
 	private final PalletController palletController;
 	private final CookieController cookieController;
 
+    private TextField palletId;
 	private ComboBox<String> cookieName;
 	private DatePicker productionDate;
 	private TextField location;
@@ -45,13 +47,23 @@ public class EditForm extends GridPane {
 		this.getColumnConstraints().add(col1);
 		this.getColumnConstraints().add(col2);
 
-		Label l = new Label("Cookie:");
+        Label l = new Label("pallet ID:");
+
+        palletId = new TextField();
+        palletId.setText(pallet.getPalletId().getValue().toString());
+        palletId.setDisable(true);
+
+        this.add(l, 0, 0);
+        this.add(palletId, 1, 0);
+
+
+        l = new Label("Cookie:");
 
 		cookieName = new ComboBox<String>(cookieController.getObservableList());
         cookieName.getSelectionModel().select(pallet.getCookieName().getValue());
 
-		this.add(l, 0, 0);
-		this.add(cookieName, 1, 0);
+		this.add(l, 0, 1);
+		this.add(cookieName, 1, 1);
 
 		l = new Label("Production date:");
 		productionDate = new DatePicker();
@@ -60,22 +72,21 @@ public class EditForm extends GridPane {
 			productionDate.setValue(LocalDate.parse(pallet.getProductionDate().getValue()));
 		}
 
-
-		this.add(l, 0, 1);
-		this.add(productionDate, 1, 1);
+		this.add(l, 0, 2);
+		this.add(productionDate, 1, 2);
 
 		l = new Label("Location:");
 		location = new TextField();
 		location.setText(pallet.getLocation().getValue());
 
-		this.add(l, 0, 2);
-		this.add(location, 1, 2);
+		this.add(l, 0, 3);
+		this.add(location, 1, 3);
 
 		l = new Label("Blocked:");
 		blocked = new CheckBox();
 
-		this.add(l, 0, 3);
-		this.add(blocked, 1, 3);
+		this.add(l, 0, 4);
+		this.add(blocked, 1, 4);
 
 		saveButton = new Button("Update");
 		saveButton.setDefaultButton(true);
@@ -89,10 +100,13 @@ public class EditForm extends GridPane {
 
 	}
 
+    // Something wrong, palletId.getId() returns null.. Could try with toString().
 	private class UpdateButtonEventHandler implements EventHandler<ActionEvent> {
 		@Override
 		public void handle(ActionEvent event) {
-
+                if (palletController.updateLocation(palletId.getId(), location.getText())) {
+                    JOptionPane.showConfirmDialog(null, "The creation was completed");
+                }
 
 
 			// TODO: Call palletController.create(<data>).

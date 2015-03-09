@@ -221,4 +221,35 @@ public class Database {
         }
         return false;
     }
+
+    public boolean updateLocationOfPallet(String id, String location) {
+        String updateSQL = "update pallet " +
+                "set location = ? " +
+                "where palletId = ?";
+
+        PreparedStatement ps = null;
+
+        try {
+            ps = conn.prepareStatement(updateSQL);
+
+            ps.setString(1, location);
+            ps.setString(2, id);
+
+            System.out.println(id);
+            ps.executeUpdate();
+
+            return true;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                ps.close();
+            } catch (SQLException e) {
+                // ... can do nothing if things go wrong here
+            }
+        }
+
+        return false;
+    }
 }

@@ -50,4 +50,12 @@ public class PalletController {
             return false;
         }
     }
+
+    public boolean updateLocation(String id, String location) {
+        if(db.updateLocationOfPallet(id, location)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
