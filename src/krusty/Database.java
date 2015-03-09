@@ -160,16 +160,16 @@ public class Database {
 	}
 
     public boolean createNewPallet(String cookieName, LocalDate productionDate, String location) {
-        String selectSQL = "select ingredientName, amount" +
-                "from cookie_ingredient" +
+        String selectSQL = "select ingredientName, amount " +
+                "from cookie_ingredient " +
                 "where cookieName = ?";
 
-        String updateSQL = "update ingredient_storage" +
-                "set amount = amount - ?" +
-                "where ingredient_name = ?";
+        String updateSQL = "update ingredient_storage " +
+                "set amount = amount - ? " +
+                "where ingredientName = ?";
 
-        String insertSQL = "insert into Pallet" +
-                "(cookieName, productionDate, location)" +
+        String insertSQL = "insert into Pallet " +
+                "(cookieName, productionDate, location) " +
                 "values (?, ?, ?)";
 
         PreparedStatement ps = null;
