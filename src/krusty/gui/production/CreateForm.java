@@ -12,7 +12,7 @@ import krusty.models.Pallet;
 import javax.swing.*;
 import java.time.LocalDate;
 
-public class Form extends GridPane {
+public class CreateForm extends GridPane {
 
 	private final PalletController palletController;
 	private final CookieController cookieController;
@@ -27,7 +27,7 @@ public class Form extends GridPane {
 
 	private Pallet pallet = null;
 
-	public Form(PalletController palletController, CookieController cookieController) {
+	public CreateForm(PalletController palletController, CookieController cookieController) {
 		this.palletController = palletController;
 		this.cookieController = cookieController;
 

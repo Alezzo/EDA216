@@ -10,7 +10,7 @@ public class Modal extends BorderPane {
 
 	public Modal(PalletController palletController, CookieController cookieController, Pallet pallet) {
 
-		Form form = new Form(palletController, cookieController);
+		CreateForm form = new CreateForm(palletController, cookieController);
 		form.setPallet(pallet);
 
 		BorderPane.setMargin(form, new Insets(10, 10, 10, 10));
