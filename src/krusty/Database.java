@@ -160,7 +160,39 @@ public class Database {
 	}
 
     public boolean createNewPallet(String cookieName, LocalDate productionDate, String location) {
+        String insertSQL = "insert into Pallet" +
+                "values (NULL, ?, NULL, ?, ?, 0, NULL)";
 
+        PreparedStatement ps = null;
+
+        try {
+            ps = conn.prepareStatement(insertSQL);
+
+            int i = 1;
+
+            if (cookieName != null) {
+                ps.setString(i++, cookieName);
+            }
+            if (productionDate != null) {
+                ps.setString(i++, productionDate.toString());
+            }
+            if (location != null) {
+                ps.setString(i++, location.toString());
+            }
+
+            ps.executeUpdate();
+
+            return true;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                ps.close();
+            } catch (SQLException e) {
+                // ... can do nothing if things go wrong here
+            }
+        }
         return false;
     }
 }
