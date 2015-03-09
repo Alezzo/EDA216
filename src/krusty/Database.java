@@ -169,17 +169,9 @@ public class Database {
         try {
             ps = conn.prepareStatement(insertSQL);
 
-            int i = 1;
-
-            if (cookieName != null) {
-                ps.setString(i++, cookieName);
-            }
-            if (productionDate != null) {
-                ps.setString(i++, productionDate.toString());
-            }
-            if (location != null) {
-                ps.setString(i++, location);
-            }
+	        ps.setString(1, cookieName);
+            ps.setString(2, productionDate.toString());
+            ps.setString(3, location);
 
             System.out.println(cookieName + " " + productionDate + " " + location);
             ps.executeUpdate();
