@@ -1,5 +1,6 @@
 package krusty.gui.production;
 
+import com.sun.codemodel.internal.JOp;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.*;
@@ -42,6 +43,9 @@ public class Form extends GridPane {
 
 		cookieName = new ComboBox<String>(cookieController.getObservableList());
 
+        cookieController.getObservableList().add(0, "Any cookie");
+        cookieName.getSelectionModel().select("Any cookie");
+
 		this.add(l, 0, 0);
 		this.add(cookieName, 1, 0);
 
@@ -72,7 +76,7 @@ public class Form extends GridPane {
 
 		Button cancelButton = new Button("Cancel");
 		cancelButton.setCancelButton(true);
-		//cancelButton.setOnAction(new ClearButtonEventHandler());
+		cancelButton.setOnAction(new ClearButtonEventHandler());
 		this.add(cancelButton, 0, 10);
 
 	}
