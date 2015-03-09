@@ -179,20 +179,24 @@ public class Database {
             ps.setString(1, cookieName);
 
             ArrayList<String> ingredients = new ArrayList<>();
+            ArrayList<Integer> amounts = new ArrayList<>();
 
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
                 ingredients.add(rs.getString("ingredientName"));
+                amounts.add(rs.getInt("amount"));
             }
 
             for (String ingredient : ingredients) {
-                ps = conn.prepareStatement(updateSQL);
+                for (int amount : amounts) {
+                    ps = conn.prepareStatement(updateSQL);
 
-                ResultSet rs2 = ps.executeQuery();
+                    ps.setInt(1, amount);
+                    ps.setString(2, ingredient);
 
-                ps.setInt(1, rs2.getInt("amount"));
-                ps.setString(2, ingredient);
+                    ps.executeUpdate();
+                }
             }
 
             ps = conn.prepareStatement(insertSQL);
@@ -216,9 +220,5 @@ public class Database {
             }
         }
         return false;
-    }
-
-    private void updateStorage() {
-
     }
 }
