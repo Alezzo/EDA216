@@ -90,7 +90,7 @@ public class Form extends GridPane {
 	private class CreateButtonEventHandler implements EventHandler<ActionEvent> {
 		@Override
 		public void handle(ActionEvent event) {
-           if (palletController.create(cookieName.getValue(), productionDate.getValue(), location.getText().toString())){
+           if (palletController.create(cookieName.getValue(), productionDate.getValue(), location.getText())){
                JOptionPane.showConfirmDialog(null, "The creation was completed");
             }
 
