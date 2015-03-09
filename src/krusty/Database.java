@@ -177,9 +177,10 @@ public class Database {
                 ps.setString(i++, productionDate.toString());
             }
             if (location != null) {
-                ps.setString(i++, location.toString());
+                ps.setString(i++, location);
             }
 
+            System.out.println(cookieName + " " + productionDate + " " + location);
             ps.executeUpdate();
 
             return true;

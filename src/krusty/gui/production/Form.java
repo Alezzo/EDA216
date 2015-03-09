@@ -66,7 +66,7 @@ public class Form extends GridPane {
 
 		Button button = new Button("Create");
 		button.setDefaultButton(true);
-		//button.setOnAction(new SearchButtonEventHandler());
+		button.setOnAction(new CreateButtonEventHandler());
 		this.add(button, 1, 10);
 
 		Button cancelButton = new Button("Cancel");
@@ -86,7 +86,7 @@ public class Form extends GridPane {
 	private class CreateButtonEventHandler implements EventHandler<ActionEvent> {
 		@Override
 		public void handle(ActionEvent event) {
-            palletController.create(cookieName.getValue(), productionDate.getValue(), location.toString());
+            palletController.create(cookieName.getValue(), productionDate.getValue(), location.getText().toString());
 
 			// TODO: Call palletController.create(<data>).
 			// TODO: Also check if the pallet is new or not, possible by setting this.pallet in setPallet, and if null create else update.
