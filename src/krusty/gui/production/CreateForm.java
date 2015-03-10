@@ -78,7 +78,7 @@ public class CreateForm extends GridPane {
 		saveButton.setOnAction(new CreateButtonEventHandler());
 		this.add(saveButton, 1, 10);
 
-		cancelButton = new Button("Cancel");
+		cancelButton = new Button("Clear");
 		cancelButton.setCancelButton(true);
 		cancelButton.setOnAction(new ClearButtonEventHandler());
 		this.add(cancelButton, 0, 10);
@@ -101,7 +101,19 @@ public class CreateForm extends GridPane {
 
 			if (pallet == null) {
 				if (palletController.create(cookieName.getValue(), productionDate.getValue(), location.getText())){
-					JOptionPane.showConfirmDialog(null, "The creation was completed");
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Confirmation");
+                    alert.setHeaderText("Pallet successfully created");
+                    alert.setContentText("Press OK to continue");
+
+                    alert.showAndWait();
+
+                    cookieName.getSelectionModel().select(0);
+                    productionDate.setValue(LocalDate.now());
+                    location.setText("");
+                    blocked.setSelected(false);
+
+                    //JOptionPane.showMessageDialog(null, "The creation was completed");
 				}
 			} else {
 				// TODO: Update!
@@ -117,8 +129,7 @@ public class CreateForm extends GridPane {
         @Override
         public void handle(ActionEvent event) {
             cookieName.getSelectionModel().select(0);
-            //productionDate.setValue(LocalDate.now());
-            productionDate.setValue(null);
+            productionDate.setValue(LocalDate.now());
             location.setText("");
             blocked.setSelected(false);
         }

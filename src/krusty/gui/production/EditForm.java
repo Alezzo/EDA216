@@ -1,5 +1,6 @@
 package krusty.gui.production;
 
+import com.sun.codemodel.internal.JOp;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.*;
@@ -11,6 +12,7 @@ import krusty.models.Pallet;
 
 import javax.swing.*;
 import java.time.LocalDate;
+import java.util.Optional;
 
 public class EditForm extends GridPane {
 
@@ -105,7 +107,17 @@ public class EditForm extends GridPane {
 		@Override
 		public void handle(ActionEvent event) {
                 if (palletController.updateLocation(palletId.getId(), location.getText())) {
-                    JOptionPane.showConfirmDialog(null, "The creation was completed");
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Confirmation");
+                    alert.setHeaderText("Pallet successfully updated");
+                    alert.setContentText("Press OK to continue");
+
+                    Optional<ButtonType> result = alert.showAndWait();
+                    if (result.get() == ButtonType.OK) {
+                        modal.closeModal();
+                    }
+
+                    //JOptionPane.showMessageDialog(null, "The creation was completed");
                 }
 
 
