@@ -32,7 +32,7 @@ public class CreateForm extends GridPane {
 		this.cookieController = cookieController;
 
 		//this.setMaxSize(200, 200);
-		this.setVgap(5);
+		this.setVgap(4);
 
 		ColumnConstraints col1 = new ColumnConstraints();
 		col1.setPercentWidth(25);

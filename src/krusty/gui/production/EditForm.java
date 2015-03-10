@@ -38,13 +38,13 @@ public class EditForm extends GridPane {
 		this.pallet = pallet;
 		this.modal = modal;
 
-		this.setVgap(5);
+		this.setVgap(4);
 
 		ColumnConstraints col1 = new ColumnConstraints();
-		col1.setPercentWidth(25);
+		col1.setPercentWidth(45);
 
 		ColumnConstraints col2 = new ColumnConstraints();
-		col2.setPercentWidth(75);
+		col2.setPercentWidth(55);
 
 		this.getColumnConstraints().add(col1);
 		this.getColumnConstraints().add(col2);
@@ -63,6 +63,7 @@ public class EditForm extends GridPane {
 
 		cookieName = new ComboBox<String>(cookieController.getObservableList());
         cookieName.getSelectionModel().select(pallet.getCookieName().getValue());
+        cookieName.setDisable(true);
 
 		this.add(l, 0, 1);
 		this.add(cookieName, 1, 1);
@@ -73,6 +74,7 @@ public class EditForm extends GridPane {
 		if (pallet.getProductionDate().getValue() != null) {
 			productionDate.setValue(LocalDate.parse(pallet.getProductionDate().getValue()));
 		}
+        productionDate.setDisable(true);
 
 		this.add(l, 0, 2);
 		this.add(productionDate, 1, 2);
@@ -106,7 +108,7 @@ public class EditForm extends GridPane {
 	private class UpdateButtonEventHandler implements EventHandler<ActionEvent> {
 		@Override
 		public void handle(ActionEvent event) {
-                if (palletController.updateLocation(palletId.getId(), location.getText())) {
+                if (palletController.updateLocation(palletId.getText(), location.getText())) {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Confirmation");
                     alert.setHeaderText("Pallet successfully updated");
@@ -115,8 +117,8 @@ public class EditForm extends GridPane {
                     Optional<ButtonType> result = alert.showAndWait();
                     if (result.get() == ButtonType.OK) {
                         modal.closeModal();
-                    }
 
+                    }
                     //JOptionPane.showMessageDialog(null, "The creation was completed");
                 }
 
