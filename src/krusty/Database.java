@@ -159,7 +159,7 @@ public class Database {
 
 	}
 
-    public boolean createNewPallet(String cookieName, LocalDate productionDate, String location) {
+    public boolean createNewPallet(String cookieName, LocalDate productionDate, String location, boolean blocked) {
         String selectSQL = "select ingredientName, amount " +
                 "from cookie_ingredient " +
                 "where cookieName = ?";
@@ -169,8 +169,8 @@ public class Database {
                 "where ingredientName = ?";
 
         String insertSQL = "insert into Pallet " +
-                "(cookieName, productionDate, location) " +
-                "values (?, ?, ?)";
+                "(cookieName, productionDate, location, isBlocked) " +
+                "values (?, ?, ?, ?)";
 
         PreparedStatement ps = null;
 
@@ -204,8 +204,8 @@ public class Database {
 	        ps.setString(1, cookieName);
             ps.setString(2, productionDate.toString());
             ps.setString(3, location);
-
-            System.out.println(cookieName + " " + productionDate + " " + location);
+            ps.setBoolean(4, blocked);
+            
             ps.executeUpdate();
 
             return true;
@@ -222,9 +222,9 @@ public class Database {
         return false;
     }
 
-    public boolean updateLocationOfPallet(String id, String location) {
+    public boolean updateLocationOfPallet(String id, String location, boolean blocked) {
         String updateSQL = "update pallet " +
-                "set location = ? " +
+                "set location = ?, isBlocked = ? " +
                 "where palletId = ?";
 
         PreparedStatement ps = null;
@@ -233,9 +233,9 @@ public class Database {
             ps = conn.prepareStatement(updateSQL);
 
             ps.setString(1, location);
-            ps.setString(2, id);
+            ps.setBoolean(2, blocked);
+            ps.setString(3, id);
 
-            System.out.println(id);
             ps.executeUpdate();
 
             return true;

@@ -43,16 +43,16 @@ public class PalletController {
 		observableList.addAll(db.getPalletsForCookie(cookieName, fromDate, toDate));
 	}
 
-    public boolean create(String cookieName, LocalDate productionDate, String location) {
-        if(db.createNewPallet(cookieName, productionDate, location)) {
+    public boolean create(String cookieName, LocalDate productionDate, String location, boolean blocked) {
+        if(db.createNewPallet(cookieName, productionDate, location, blocked)) {
             return true;
         } else {
             return false;
         }
     }
 
-    public boolean updateLocation(String id, String location) {
-        if(db.updateLocationOfPallet(id, location)) {
+    public boolean updateLocation(String id, String location, boolean blocked) {
+        if(db.updateLocationOfPallet(id, location, blocked)) {
             return true;
         } else {
             return false;

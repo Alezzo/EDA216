@@ -100,7 +100,7 @@ public class CreateForm extends GridPane {
 		public void handle(ActionEvent event) {
 
 			if (pallet == null) {
-				if (palletController.create(cookieName.getValue(), productionDate.getValue(), location.getText())){
+				if (palletController.create(cookieName.getValue(), productionDate.getValue(), location.getText(), blocked.isSelected())){
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Confirmation");
                     alert.setHeaderText("Pallet successfully created");
