@@ -38,9 +38,9 @@ public class PalletController {
 		observableList.addAll(db.getAllPallets());
 	}
 
-	public void search(String cookieName, LocalDate fromDate, LocalDate toDate) {
+	public void search(String cookieName, LocalDate fromDate, LocalDate toDate, CheckBox isBlocked) {
 		observableList.clear();
-		observableList.addAll(db.getPalletsForCookie(cookieName, fromDate, toDate));
+		observableList.addAll(db.getPalletsForCookie(cookieName, fromDate, toDate, isBlocked));
 	}
 
     public boolean create(String cookieName, LocalDate productionDate, String location, boolean blocked) {

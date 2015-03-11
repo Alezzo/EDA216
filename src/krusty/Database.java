@@ -8,6 +8,8 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import javafx.scene.control.CheckBox;
+
 /**
  * Database is a class that specifies the interface to the movie database. Uses
  * JDBC and the MySQL Connector/J driver.
@@ -103,38 +105,45 @@ public class Database {
 	}
 
 	public ArrayList<Pallet> getAllPallets() {
-
-		return getPalletsForCookie(null, null, null);
+		CheckBox showAll = new CheckBox();
+		showAll.setSelected(false);
+		return getPalletsForCookie(null, null, null, showAll);
 
 	}
 
 
-	public ArrayList<Pallet> getPalletsForCookie(String cookieName, LocalDate fromDate, LocalDate toDate) {
+	public ArrayList<Pallet> getPalletsForCookie(String cookieName, LocalDate fromDate, LocalDate toDate, CheckBox isBlocked) {
 
 		String sql = "select palletId, cookieName, orderId, productionDate, deliveryDate, location, isBlocked " +
 				"from Pallet";
 
-		String andWhere = "where";
+		String andWhere = " where";
 
 		if (cookieName != null) {
-			sql += " " + andWhere + " cookieName = ?";
-			andWhere = "and";
+			sql += andWhere + " cookieName = ?";
+			andWhere = " and";
 		}
 		if (fromDate != null) {
-			sql += " " + andWhere + " productionDate > ?";
-			andWhere = "and";
+			sql += andWhere + " productionDate > ?";
+			andWhere = " and";
 		}
 		if (toDate != null) {
-			sql += " " + andWhere + " deliveryDate < ?";
+			sql += andWhere + " deliveryDate < ?";
+			andWhere = " and";
+		} 
+		if (isBlocked.isSelected()) {
+			sql += andWhere + " isBlocked = true";
 		}
+		if(isBlocked.isIndeterminate()){
+			sql += andWhere + " isBlocked = false";
+		} 
+		sql += " order by palletId";
 
 		ArrayList<Pallet> pallets = new ArrayList<>();
 
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
-
 			int i = 1;
-
 			if (cookieName != null) {
                 ps.setString(i++, cookieName);
 			}
@@ -156,7 +165,6 @@ public class Database {
 			e.printStackTrace();
 		}
 		return pallets;
-
 	}
 
     public boolean createNewPallet(String cookieName, LocalDate productionDate, String location, boolean blocked) {

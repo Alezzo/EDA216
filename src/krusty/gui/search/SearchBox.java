@@ -61,6 +61,7 @@ public class SearchBox extends GridPane {
 
 		Label isBlockedLabel = new Label("Blocked");
 		isBlocked = new CheckBox();
+		isBlocked.setAllowIndeterminate(true);
 
 		this.add(isBlockedLabel, 3, 0);
 		this.add(isBlocked, 3, 1);
@@ -84,7 +85,7 @@ public class SearchBox extends GridPane {
 			if (cookie.equals("Choose a cookie")) {
 				cookie = null;
 			}
-			palletController.search(cookie, fromDatePicker.getValue(), toDatePicker.getValue());
+			palletController.search(cookie, fromDatePicker.getValue(), toDatePicker.getValue(),isBlocked);
 		}
 	}
 
