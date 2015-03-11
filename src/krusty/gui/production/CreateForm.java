@@ -98,9 +98,16 @@ public class CreateForm extends GridPane {
 	private class CreateButtonEventHandler implements EventHandler<ActionEvent> {
 		@Override
 		public void handle(ActionEvent event) {
+            if (pallet == null) {
+                if (cookieName.getValue() == "Choose a cookie") {
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("Warning");
+                    alert.setHeaderText("Something wrong");
+                    alert.setContentText("Did you forget to choose a cookie?");
 
-			if (pallet == null) {
-				if (palletController.create(cookieName.getValue(), productionDate.getValue(), location.getText(), blocked.isSelected())){
+                    alert.showAndWait();
+                }
+				else if (palletController.create(cookieName.getValue(), productionDate.getValue(), location.getText(), blocked.isSelected())){
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Confirmation");
                     alert.setHeaderText("Pallet successfully created");
@@ -115,13 +122,7 @@ public class CreateForm extends GridPane {
 
                     //JOptionPane.showMessageDialog(null, "The creation was completed");
 				}
-			} else {
-				// TODO: Update!
 			}
-
-			// TODO: Call palletController.create(<data>).
-			// TODO: Also check if the pallet is new or not, possible by setting this.pallet in setPallet, and if null create else update.
-			// Show confirmation and reset form fields, preferable using the cancelButton.
 		}
 	}
 
