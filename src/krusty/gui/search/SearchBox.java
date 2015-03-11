@@ -59,22 +59,22 @@ public class SearchBox extends GridPane {
 		this.add(cookieLabel, 2, 0);
 		this.add(selectedCookie, 2, 1);
 
-		Label isBlockedLabel = new Label("Blocked");
+		Label isBlockedLabel = new Label("Blocked?");
 		isBlocked = new CheckBox();
 		isBlocked.setAllowIndeterminate(true);
 
 		this.add(isBlockedLabel, 3, 0);
-		this.add(isBlocked, 3, 1);
-
-		Button clearButton = new Button("Clear");
-		clearButton.setCancelButton(true);
-		clearButton.setOnAction(new ClearButtonEventHandler());
-		this.add(clearButton, 4, 0);
+		this.add(isBlocked, 3, 1);	
 
 		Button button = new Button("Search");
 		button.setDefaultButton(true);
 		button.setOnAction(new SearchButtonEventHandler());
 		this.add(button, 4, 1);
+		
+		Button clearButton = new Button("Clear");
+		clearButton.setCancelButton(true);
+		clearButton.setOnAction(new ClearButtonEventHandler());
+		this.add(clearButton, 5, 1);
 
 	}
 

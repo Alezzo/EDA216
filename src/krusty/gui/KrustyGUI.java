@@ -23,7 +23,7 @@ public class KrustyGUI {
 		stage.setTitle("Krusty Kookies");
 
 		Group root = new Group();
-		Scene scene = new Scene(root, 500, 400, Color.WHITE);
+		Scene scene = new Scene(root, 700, 500, Color.WHITE);
 
 		TabPane tabPane = new TabPane();
 		tabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);

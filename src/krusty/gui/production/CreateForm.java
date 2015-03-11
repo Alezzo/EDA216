@@ -73,7 +73,7 @@ public class CreateForm extends GridPane {
 		this.add(l, 0, 3);
 		this.add(blocked, 1, 3);
 
-		saveButton = new Button("Create");
+		saveButton = new Button("Register");
 		saveButton.setDefaultButton(true);
 		saveButton.setOnAction(new CreateButtonEventHandler());
 		this.add(saveButton, 1, 10);

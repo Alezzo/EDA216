@@ -11,7 +11,7 @@ import krusty.gui.production.CreateForm;
 public class ProductionTab extends Tab {
 
 	public ProductionTab(PalletController palletController, CookieController cookieController) {
-		this.setText("Production");
+		this.setText("Register Pallet");
 
 		CreateForm form = new CreateForm(palletController, cookieController);
 
