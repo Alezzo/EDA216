@@ -105,7 +105,7 @@ public class EditForm extends GridPane {
 	private class UpdateButtonEventHandler implements EventHandler<ActionEvent> {
 		@Override
 		public void handle(ActionEvent event) {
-                if (palletController.updateLocation(palletId.getText(), location.getText(), blocked.isSelected())) {
+                if (palletController.editPalletInformation(palletId.getText(), location.getText(), blocked.isSelected())) {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Confirmation");
                     alert.setHeaderText("Pallet successfully updated");

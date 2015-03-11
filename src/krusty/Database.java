@@ -136,7 +136,7 @@ public class Database {
 			int i = 1;
 
 			if (cookieName != null) {
-				ps.setString(i++, cookieName);
+                ps.setString(i++, cookieName);
 			}
 			if (fromDate != null) {
 				ps.setString(i++, fromDate.toString());
@@ -205,7 +205,7 @@ public class Database {
             ps.setString(2, productionDate.toString());
             ps.setString(3, location);
             ps.setBoolean(4, blocked);
-            
+
             ps.executeUpdate();
 
             return true;
@@ -222,7 +222,7 @@ public class Database {
         return false;
     }
 
-    public boolean updateLocationOfPallet(String id, String location, boolean blocked) {
+    public boolean editPalletInformation(String id, String location, boolean blocked) {
         String updateSQL = "update pallet " +
                 "set location = ?, isBlocked = ? " +
                 "where palletId = ?";

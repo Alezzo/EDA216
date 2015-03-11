@@ -51,8 +51,8 @@ public class PalletController {
         }
     }
 
-    public boolean updateLocation(String id, String location, boolean blocked) {
-        if(db.updateLocationOfPallet(id, location, blocked)) {
+    public boolean editPalletInformation(String id, String location, boolean blocked) {
+        if(db.editPalletInformation(id, location, blocked)) {
             return true;
         } else {
             return false;
