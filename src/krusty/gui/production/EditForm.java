@@ -85,6 +85,7 @@ public class EditForm extends GridPane {
 
 		l = new Label("Blocked:");
 		blocked = new CheckBox();
+        blocked.setSelected(pallet.blocked().getValue());
 
 		this.add(l, 0, 4);
 		this.add(blocked, 1, 4);
@@ -113,6 +114,7 @@ public class EditForm extends GridPane {
 
                     Optional<ButtonType> result = alert.showAndWait();
                     if (result.get() == ButtonType.OK) {
+
                         modal.closeModal();
 
                     }

@@ -1,12 +1,6 @@
 package krusty.models;
 
-
-import java.sql.Date;
-
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
 
 public class Pallet {
 
@@ -16,7 +10,7 @@ public class Pallet {
 	private StringProperty productionDate;
 	private StringProperty deliveryDate;
 	private StringProperty location;
-	private boolean isBlocked;
+	private BooleanProperty isBlocked;
 
 	public Pallet(Integer palletId, String cookieName, Integer orderId, String productionDate, String deliveryDate, String location, boolean isBlocked) {
 		this.palletId = new SimpleIntegerProperty(palletId);
@@ -25,7 +19,7 @@ public class Pallet {
 		this.productionDate = new SimpleStringProperty(productionDate);
 		this.deliveryDate = new SimpleStringProperty(deliveryDate);
 		this.location = new SimpleStringProperty(location);
-		this.isBlocked = isBlocked;
+		this.isBlocked = new SimpleBooleanProperty(isBlocked);
 	}
 
 	public IntegerProperty getPalletId() {
@@ -43,25 +37,21 @@ public class Pallet {
 	public StringProperty getProductionDate() {
 		return productionDate;
 	}
+
+    public StringProperty getDeliveryDate() {
+        return deliveryDate;
+    }
 	
 	public StringProperty getLocation() {
 		return location;
 	}
+
+    public BooleanProperty blocked() { return isBlocked;}
 	
 	public StringProperty isBlocked() {
-		if(isBlocked){
+		if(isBlocked.getValue()){
 			return new SimpleStringProperty("Yes");
 		}
 		return new SimpleStringProperty("No");
 	}
-
-	public StringProperty getDeliveryDate() {
-		return deliveryDate;
-	}
-	
-
-
-
-
-
 }
