@@ -124,11 +124,11 @@ public class Database {
 			andWhere = " and";
 		}
 		if (fromDate != null) {
-			sql += andWhere + " productionDate > ?";
+			sql += andWhere + " productionDate >= ?";
 			andWhere = " and";
 		}
 		if (toDate != null) {
-			sql += andWhere + " deliveryDate < ?";
+			sql += andWhere + " productionDate <= ?";
 			andWhere = " and";
 		} 
 		if (isBlocked.isSelected()) {
