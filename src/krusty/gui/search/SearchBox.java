@@ -35,14 +35,14 @@ public class SearchBox extends GridPane {
 
 		Label fromDateLabel = new Label("From date");
 		fromDatePicker = new DatePicker();
-		fromDatePicker.setMaxSize(110, 40);
+		fromDatePicker.setMaxSize(115, 40);
 
 		this.add(fromDateLabel, 0, 0);
 		this.add(fromDatePicker, 0, 1);
 
 		Label toDateLabel = new Label("To date");
 		toDatePicker = new DatePicker();
-		toDatePicker.setMaxSize(110, 40);
+		toDatePicker.setMaxSize(115, 40);
 
 		this.add(toDateLabel, 1, 0);
 		this.add(toDatePicker, 1, 1);

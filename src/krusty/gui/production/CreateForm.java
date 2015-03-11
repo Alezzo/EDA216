@@ -55,7 +55,7 @@ public class CreateForm extends GridPane {
 
 		l = new Label("Production date:");
 		productionDate = new DatePicker();
-		productionDate.setMaxSize(110, 40);
+		productionDate.setMaxSize(115, 40);
 		productionDate.setValue(LocalDate.now());
 
 		this.add(l, 0, 1);

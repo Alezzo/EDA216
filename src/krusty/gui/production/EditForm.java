@@ -67,7 +67,7 @@ public class EditForm extends GridPane {
 
 		l = new Label("Production date:");
 		productionDate = new DatePicker();
-		productionDate.setMaxSize(110, 40);
+		productionDate.setMaxSize(115, 40);
 		if (pallet.getProductionDate().getValue() != null) {
 			productionDate.setValue(LocalDate.parse(pallet.getProductionDate().getValue()));
 		}
