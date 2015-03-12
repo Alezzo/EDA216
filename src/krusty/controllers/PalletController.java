@@ -50,9 +50,29 @@ public class PalletController {
 
     public boolean editPalletInformation(String id, String location, boolean blocked) {
         if(db.editPalletInformation(id, location, blocked)) {
+
+	        // Update the local pallet
+	        Pallet p = findPalletById(Integer.parseInt(id));
+
+	        if (p != null) {
+		        p.getLocation().setValue(location);
+		        p.blocked().set(blocked);
+	        }
+
             return true;
         } else {
             return false;
         }
     }
+
+	private Pallet findPalletById(int id) {
+
+		for (Pallet p : observableList) {
+			if (p.getPalletId().getValue().equals(id)) {
+				return p;
+			}
+		}
+
+		return null;
+	}
 }
