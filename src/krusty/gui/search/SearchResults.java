@@ -1,13 +1,10 @@
 package krusty.gui.search;
 
 
-import javafx.scene.Scene;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import krusty.KrustyKookies;
 import krusty.controllers.CookieController;
 import krusty.controllers.PalletController;
 import krusty.gui.production.Modal;
@@ -58,8 +55,23 @@ public class SearchResults extends TableView {
 		TableColumn<Pallet, String> location = new TableColumn("Location");
 		location.setCellValueFactory(cell -> cell.getValue().getLocation());
 		
-		TableColumn<Pallet, String> isBlocked = new TableColumn("Blocked?");
-		isBlocked.setCellValueFactory(cell -> cell.getValue().isBlocked());
+		TableColumn<Pallet, Boolean> isBlocked = new TableColumn("Blocked?");
+		isBlocked.setCellValueFactory(cell -> cell.getValue().blocked());
+		isBlocked.setCellFactory(cell -> new TableCell<Pallet, Boolean>() {
+			protected void updateItem(Boolean item, boolean empty) {
+				super.updateItem(item, empty);
+
+				if (empty) {
+					setText("");
+				} else {
+					if (item) {
+						setText("Yes");
+					} else {
+						setText("No");
+					}
+				}
+			}
+		});
 
 		getColumns().addAll(palletId, cookieName, orderId, productionDate, deliveryDate, location, isBlocked);
 

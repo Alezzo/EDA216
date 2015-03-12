@@ -47,11 +47,4 @@ public class Pallet {
 	}
 
     public BooleanProperty blocked() { return isBlocked;}
-	
-	public StringProperty isBlocked() {
-		if(isBlocked.getValue()){
-			return new SimpleStringProperty("Yes");
-		}
-		return new SimpleStringProperty("No");
-	}
 }
