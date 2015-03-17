@@ -1,6 +1,7 @@
 package krusty;
 
 import javafx.application.Application;
+import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 import krusty.gui.KrustyGUI;
 
@@ -27,7 +28,13 @@ public class KrustyKookies extends Application {
 		Database db = new Database();
 
 		if (!db.openConnection("db129", "kmg335rz")) {
-			JOptionPane.showMessageDialog(null, "Unable to connect to the database!");
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning");
+            alert.setHeaderText("Something wrong");
+            alert.setContentText("Unable to connect to the database");
+
+            alert.showAndWait();
+
 			System.exit(0);
 		}
 
