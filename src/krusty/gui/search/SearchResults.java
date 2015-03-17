@@ -42,15 +42,9 @@ public class SearchResults extends TableView {
 		TableColumn<Pallet, String> cookieName = new TableColumn("Cookie");
 		cookieName.setCellValueFactory(cell -> cell.getValue().getCookieName());
 		cookieName.setPrefWidth(90);
-
-		TableColumn<Pallet, Number> orderId = new TableColumn("Order");
-		orderId.setCellValueFactory(cell -> cell.getValue().getOrderId());
 		
 		TableColumn<Pallet, String> productionDate = new TableColumn("Production");
 		productionDate.setCellValueFactory(cell -> cell.getValue().getProductionDate());
-		
-		TableColumn<Pallet, String> deliveryDate = new TableColumn("Delivery");
-		deliveryDate.setCellValueFactory(cell -> cell.getValue().getDeliveryDate());
 		
 		TableColumn<Pallet, String> location = new TableColumn("Location");
 		location.setCellValueFactory(cell -> cell.getValue().getLocation());
@@ -73,7 +67,7 @@ public class SearchResults extends TableView {
 			}
 		});
 
-		getColumns().addAll(palletId, cookieName, orderId, productionDate, deliveryDate, location, isBlocked);
+		getColumns().addAll(palletId, cookieName, productionDate, location, isBlocked);
 
 		setItems(palletController.getObservableList());
 

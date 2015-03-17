@@ -1,7 +1,6 @@
 package krusty;
 
 import krusty.models.Pallet;
-import sun.misc.Perf;
 
 import java.lang.String;
 import java.sql.*;
@@ -158,7 +157,7 @@ public class Database {
 
 			while (rs.next())
 			{
-				pallets.add(new Pallet(rs.getInt("palletId"), rs.getString("cookieName"), rs.getInt("orderId"), rs.getString("productionDate"), rs.getString("deliveryDate"), rs.getString("location"), rs.getBoolean("isBlocked")));
+				pallets.add(new Pallet(rs.getInt("palletId"), rs.getString("cookieName"), rs.getString("productionDate"), rs.getString("location"), rs.getBoolean("isBlocked")));
 			}
 
 		} catch (SQLException e) {

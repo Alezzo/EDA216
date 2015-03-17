@@ -12,12 +12,10 @@ public class Pallet {
 	private StringProperty location;
 	private BooleanProperty isBlocked;
 
-	public Pallet(Integer palletId, String cookieName, Integer orderId, String productionDate, String deliveryDate, String location, boolean isBlocked) {
+	public Pallet(Integer palletId, String cookieName, String productionDate, String location, boolean isBlocked) {
 		this.palletId = new SimpleIntegerProperty(palletId);
 		this.cookieName = new SimpleStringProperty(cookieName);
-		this.orderId = new SimpleIntegerProperty(orderId);
 		this.productionDate = new SimpleStringProperty(productionDate);
-		this.deliveryDate = new SimpleStringProperty(deliveryDate);
 		this.location = new SimpleStringProperty(location);
 		this.isBlocked = new SimpleBooleanProperty(isBlocked);
 	}
@@ -29,18 +27,10 @@ public class Pallet {
 	public StringProperty getCookieName() {
 		return cookieName;
 	}
-
-	public IntegerProperty getOrderId() {
-		return orderId;
-	}
 	
 	public StringProperty getProductionDate() {
 		return productionDate;
 	}
-
-    public StringProperty getDeliveryDate() {
-        return deliveryDate;
-    }
 	
 	public StringProperty getLocation() {
 		return location;

@@ -42,6 +42,8 @@ public class PalletController {
 
     public boolean register(String cookieName, LocalDate productionDate, String location) {
         if(db.registerNewPallet(cookieName, productionDate, location)) {
+            Pallet lastPallet = observableList.get(observableList.size() - 1);
+            observableList.add(new Pallet(lastPallet.getPalletId().getValue() + 1, cookieName, productionDate.toString(), location, false));
             return true;
         } else {
             return false;
