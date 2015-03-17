@@ -9,10 +9,9 @@ import krusty.controllers.CookieController;
 import krusty.controllers.PalletController;
 import krusty.models.Pallet;
 
-import javax.swing.*;
 import java.time.LocalDate;
 
-public class CreateForm extends GridPane {
+public class RegisterForm extends GridPane {
 
 	private final PalletController palletController;
 	private final CookieController cookieController;
@@ -20,14 +19,13 @@ public class CreateForm extends GridPane {
 	private ComboBox<String> cookieName;
 	private DatePicker productionDate;
 	private TextField location;
-	private CheckBox blocked;
 
 	private Button saveButton;
 	private Button cancelButton;
 
 	private Pallet pallet = null;
 
-	public CreateForm(PalletController palletController, CookieController cookieController) {
+	public RegisterForm(PalletController palletController, CookieController cookieController) {
 		this.palletController = palletController;
 		this.cookieController = cookieController;
 
@@ -67,15 +65,9 @@ public class CreateForm extends GridPane {
 		this.add(l, 0, 2);
 		this.add(location, 1, 2);
 
-		l = new Label("Blocked:");
-		blocked = new CheckBox();
-
-		this.add(l, 0, 3);
-		this.add(blocked, 1, 3);
-
 		saveButton = new Button("Register");
 		saveButton.setDefaultButton(true);
-		saveButton.setOnAction(new CreateButtonEventHandler());
+		saveButton.setOnAction(new RegisterButtonEventHandler());
 		this.add(saveButton, 1, 10);
 
 		cancelButton = new Button("Clear");
@@ -92,10 +84,9 @@ public class CreateForm extends GridPane {
 		this.cookieName.setValue(pallet.getCookieName().getValue());
 		this.productionDate.setValue(LocalDate.parse(pallet.getProductionDate().getValue()));
 		this.location.setText(pallet.getLocation().getValue());
-		// TODO: Blocked?
 	}
 
-	private class CreateButtonEventHandler implements EventHandler<ActionEvent> {
+	private class RegisterButtonEventHandler implements EventHandler<ActionEvent> {
 		@Override
 		public void handle(ActionEvent event) {
             if (pallet == null) {
@@ -107,7 +98,7 @@ public class CreateForm extends GridPane {
 
                     alert.showAndWait();
                 }
-				else if (palletController.create(cookieName.getValue(), productionDate.getValue(), location.getText(), blocked.isSelected())){
+				else if (palletController.register(cookieName.getValue(), productionDate.getValue(), location.getText())){
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Confirmation");
                     alert.setHeaderText("Pallet successfully created");
@@ -118,9 +109,6 @@ public class CreateForm extends GridPane {
                     cookieName.getSelectionModel().select(0);
                     productionDate.setValue(LocalDate.now());
                     location.setText("");
-                    blocked.setSelected(false);
-
-                    //JOptionPane.showMessageDialog(null, "The creation was completed");
 				}
 			}
 		}
@@ -132,8 +120,6 @@ public class CreateForm extends GridPane {
             cookieName.getSelectionModel().select(0);
             productionDate.setValue(LocalDate.now());
             location.setText("");
-            blocked.setSelected(false);
         }
     }
-
 }

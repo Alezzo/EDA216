@@ -102,29 +102,22 @@ public class EditForm extends GridPane {
 
 	}
 
-    // Something wrong, palletId.getId() returns null.. Could try with toString().
 	private class UpdateButtonEventHandler implements EventHandler<ActionEvent> {
 		@Override
 		public void handle(ActionEvent event) {
-                if (palletController.editPalletInformation(palletId.getText(), location.getText(), blocked.isSelected())) {
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Confirmation");
-                    alert.setHeaderText("Pallet successfully updated");
-                    alert.setContentText("Press OK to continue");
+            if (palletController.editPalletInformation(palletId.getText(), location.getText(), blocked.isSelected())) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Confirmation");
+                alert.setHeaderText("Pallet successfully updated");
+                alert.setContentText("Press OK to continue");
 
-                    Optional<ButtonType> result = alert.showAndWait();
-                    if (result.get() == ButtonType.OK) {
+                Optional<ButtonType> result = alert.showAndWait();
+                if (result.get() == ButtonType.OK) {
 
-                        modal.closeModal();
+                    modal.closeModal();
 
-                    }
-                    //JOptionPane.showMessageDialog(null, "The creation was completed");
                 }
-
-
-			// TODO: Call palletController.create(<data>).
-			// TODO: Also check if the pallet is new or not, possible by setting this.pallet in setPallet, and if null create else update.
-			// Show confirmation and reset form fields, preferable using the cancelButton.
+            }
 		}
 	}
 
@@ -134,5 +127,4 @@ public class EditForm extends GridPane {
             modal.closeModal();
         }
     }
-
 }

@@ -167,7 +167,7 @@ public class Database {
 		return pallets;
 	}
 
-    public boolean createNewPallet(String cookieName, LocalDate productionDate, String location, boolean blocked) {
+    public boolean registerNewPallet(String cookieName, LocalDate productionDate, String location) {
         String selectSQL = "select ingredientName, amount " +
                 "from cookie_ingredient " +
                 "where cookieName = ?";
@@ -177,8 +177,8 @@ public class Database {
                 "where ingredientName = ?";
 
         String insertSQL = "insert into Pallet " +
-                "(cookieName, productionDate, location, isBlocked) " +
-                "values (?, ?, ?, ?)";
+                "(cookieName, productionDate, location) " +
+                "values (?, ?, ?)";
 
         PreparedStatement ps = null;
 
@@ -212,7 +212,6 @@ public class Database {
 	        ps.setString(1, cookieName);
             ps.setString(2, productionDate.toString());
             ps.setString(3, location);
-            ps.setBoolean(4, blocked);
 
             ps.executeUpdate();
 

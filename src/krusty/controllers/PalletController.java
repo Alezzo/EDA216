@@ -40,8 +40,8 @@ public class PalletController {
 		observableList.addAll(db.getPalletsForCookie(cookieName, fromDate, toDate, isBlocked));
 	}
 
-    public boolean create(String cookieName, LocalDate productionDate, String location, boolean blocked) {
-        if(db.createNewPallet(cookieName, productionDate, location, blocked)) {
+    public boolean register(String cookieName, LocalDate productionDate, String location) {
+        if(db.registerNewPallet(cookieName, productionDate, location)) {
             return true;
         } else {
             return false;
