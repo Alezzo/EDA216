@@ -50,6 +50,13 @@ public class PalletController {
         }
     }
 
+    public void deletePallet(String id) {
+        if(db.deletePallet(id)) {
+            Pallet p = findPalletById(Integer.parseInt(id));
+            observableList.removeAll(p);
+        }
+    }
+
     public boolean editPalletInformation(String id, String location, boolean blocked) {
         if(db.editPalletInformation(id, location, blocked)) {
 

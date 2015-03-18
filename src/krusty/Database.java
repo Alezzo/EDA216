@@ -228,6 +228,34 @@ public class Database {
         return false;
     }
 
+    public boolean deletePallet(String id) {
+        String deleteSQL = "delete from pallet " +
+                "where palletId = ?";
+
+        PreparedStatement ps = null;
+
+        try {
+            ps = conn.prepareStatement(deleteSQL);
+
+            ps.setString(1, id);
+
+            ps.executeUpdate();
+
+            return true;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                ps.close();
+            } catch (SQLException e) {
+            // ... can do nothing if things go wrong here
+            }
+        }
+
+        return false;
+    }
+
     public boolean editPalletInformation(String id, String location, boolean blocked) {
         String updateSQL = "update pallet " +
                 "set location = ?, isBlocked = ? " +

@@ -41,13 +41,14 @@ public class SearchResults extends TableView {
 
 		TableColumn<Pallet, String> cookieName = new TableColumn("Cookie");
 		cookieName.setCellValueFactory(cell -> cell.getValue().getCookieName());
-		cookieName.setPrefWidth(90);
+		cookieName.setPrefWidth(110);
 		
 		TableColumn<Pallet, String> productionDate = new TableColumn("Production");
 		productionDate.setCellValueFactory(cell -> cell.getValue().getProductionDate());
 		
 		TableColumn<Pallet, String> location = new TableColumn("Location");
 		location.setCellValueFactory(cell -> cell.getValue().getLocation());
+        location.setPrefWidth(110);
 		
 		TableColumn<Pallet, Boolean> isBlocked = new TableColumn("Blocked?");
 		isBlocked.setCellValueFactory(cell -> cell.getValue().blocked());

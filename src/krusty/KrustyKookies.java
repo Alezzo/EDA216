@@ -6,6 +6,7 @@ import javafx.stage.Stage;
 import krusty.gui.KrustyGUI;
 
 import javax.swing.*;
+import java.util.Locale;
 
 /**
  * KrustyKookies is the main class for the movie ticket booking
@@ -17,6 +18,8 @@ public class KrustyKookies extends Application {
 	public static Stage primaryStage;
 
     public static void main(String[] args) {
+        Locale.setDefault(new Locale("en", "GB"));
+
         launch();
         //new KrustyGUI(db);
     }
@@ -31,7 +34,7 @@ public class KrustyKookies extends Application {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Warning");
             alert.setHeaderText("Something wrong");
-            alert.setContentText("Unable to connect to the database");
+            alert.setContentText("Unable to connect to database");
 
             alert.showAndWait();
 

@@ -29,7 +29,7 @@ public class Modal {
 		stage.setTitle("Edit pallet");
 		stage.initModality(Modality.WINDOW_MODAL);
 		stage.initOwner(KrustyKookies.primaryStage);
-		Scene scene = new Scene(pane, 300, 200);
+		Scene scene = new Scene(pane, 300, 240);
 		stage.setScene(scene);
 
 		// Show the dialog and wait until the user closes it

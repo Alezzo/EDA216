@@ -3,11 +3,16 @@ package krusty.gui.production;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import krusty.controllers.CookieController;
 import krusty.controllers.PalletController;
 import krusty.models.Pallet;
+
+import java.awt.*;
 import java.time.LocalDate;
 import java.util.Optional;
 
@@ -24,6 +29,7 @@ public class EditForm extends GridPane {
 
 	private Button saveButton;
 	private Button cancelButton;
+    private Button deleteButton;
 
 	private Pallet pallet = null;
 
@@ -93,13 +99,19 @@ public class EditForm extends GridPane {
 		saveButton = new Button("Update");
 		saveButton.setDefaultButton(true);
 		saveButton.setOnAction(new UpdateButtonEventHandler());
-		this.add(saveButton, 1, 10);
+        saveButton.setStyle("-fx-background: #f15a5a;");
+        this.add(saveButton, 1, 10);
+
+        deleteButton = new Button("Delete");
+        deleteButton.setDefaultButton(true);
+        deleteButton.setOnAction(new DeleteButtonEventHandler());
+        deleteButton.setStyle("-fx-base: #f15a5a;");
+        this.add(deleteButton, 1, 12);
 
 		cancelButton = new Button("Cancel");
 		cancelButton.setCancelButton(true);
 		cancelButton.setOnAction(new CancelButtonEventHandler());
 		this.add(cancelButton, 0, 10);
-
 	}
 
 	private class UpdateButtonEventHandler implements EventHandler<ActionEvent> {
@@ -113,13 +125,31 @@ public class EditForm extends GridPane {
 
                 Optional<ButtonType> result = alert.showAndWait();
                 if (result.get() == ButtonType.OK) {
-
                     modal.closeModal();
+                } else {
 
                 }
             }
 		}
 	}
+
+    private class DeleteButtonEventHandler implements EventHandler<ActionEvent> {
+        @Override
+        public void handle(ActionEvent event) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation");
+            alert.setHeaderText("You are about to delete a pallet");
+            alert.setContentText("Are you sure you want to delete this pallet?\n\nIf so, press OK. Otherwise press cancel.");
+
+            Optional<ButtonType> result = alert.showAndWait();
+
+            if (result.get() == ButtonType.OK){
+                palletController.deletePallet(palletId.getText());
+                modal.closeModal();
+            }
+        }
+    }
+
 
     private class CancelButtonEventHandler implements EventHandler<ActionEvent> {
         @Override
