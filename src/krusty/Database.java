@@ -166,7 +166,7 @@ public class Database {
 		return pallets;
 	}
 
-    public boolean registerNewPallet(String cookieName, LocalDate productionDate, String location) {
+    public int registerNewPallet(String cookieName, LocalDate productionDate, String location) {
         String selectSQL = "select ingredientName, amount " +
                 "from cookie_ingredient " +
                 "where cookieName = ?";
@@ -206,15 +206,18 @@ public class Database {
                 }
             }
 
-            ps = conn.prepareStatement(insertSQL);
+            ps = conn.prepareStatement(insertSQL, Statement.RETURN_GENERATED_KEYS);
 
 	        ps.setString(1, cookieName);
             ps.setString(2, productionDate.toString());
             ps.setString(3, location);
 
-            ps.executeUpdate();
+	        ps.executeUpdate();
 
-            return true;
+	        rs = ps.getGeneratedKeys();
+	        if (rs != null && rs.next()) {
+		        return rs.getInt(1);
+	        }
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -225,7 +228,7 @@ public class Database {
                 // ... can do nothing if things go wrong here
             }
         }
-        return false;
+        return -1;
     }
 
     public boolean deletePallet(String id) {
