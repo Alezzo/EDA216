@@ -14,6 +14,9 @@ import javafx.scene.control.CheckBox;
  * JDBC and the MySQL Connector/J driver.
  */
 public class Database {
+
+	private final int INGREDIENTS_COST = 54;
+
 	/**
 	 * The database connection.
 	 */
@@ -199,7 +202,7 @@ public class Database {
                 for (int amount : amounts) {
                     ps = conn.prepareStatement(updateSQL);
 
-                    ps.setInt(1, amount);
+                    ps.setInt(1, amount * INGREDIENTS_COST);
                     ps.setString(2, ingredient);
 
                     ps.executeUpdate();
