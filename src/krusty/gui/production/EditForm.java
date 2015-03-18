@@ -118,17 +118,14 @@ public class EditForm extends GridPane {
 		@Override
 		public void handle(ActionEvent event) {
             if (palletController.editPalletInformation(palletId.getText(), location.getText(), blocked.isSelected())) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Confirmation");
-                alert.setHeaderText("Pallet successfully updated");
-                alert.setContentText("Press OK to continue");
+	            modal.closeModal();
+            } else {
+	            Alert alert = new Alert(Alert.AlertType.ERROR);
+	            alert.setTitle("Error");
+	            alert.setHeaderText("Unknown database error");
+	            alert.setContentText("Press OK to try again");
 
-                Optional<ButtonType> result = alert.showAndWait();
-                if (result.get() == ButtonType.OK) {
-                    modal.closeModal();
-                } else {
-
-                }
+	            alert.showAndWait();
             }
 		}
 	}
