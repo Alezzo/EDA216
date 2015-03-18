@@ -31,7 +31,7 @@ public class KrustyKookies extends Application {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Warning");
             alert.setHeaderText("Something wrong");
-            alert.setContentText("Unable to connect to the database");
+            alert.setContentText("Unable to connect to database");
 
             alert.showAndWait();
 
