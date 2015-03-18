@@ -258,4 +258,43 @@ public class Database {
 
         return false;
     }
+
+	public boolean blockAllPallets(Integer[] ids) {
+		String updateSQL = "update pallet " +
+				"set isBlocked = true " +
+				"where palletId in (";
+
+		String tmp = "";
+		for (int i = 0; i < ids.length; i++) {
+			tmp += ",?";
+		}
+		tmp = tmp.replaceFirst(",", "");
+
+		updateSQL += tmp + ")";
+
+		PreparedStatement ps = null;
+
+		try {
+			ps = conn.prepareStatement(updateSQL);
+
+			for (int i = 0; i < ids.length; i++) {
+				ps.setInt(i+1, ids[i]);
+			}
+
+			ps.executeUpdate();
+
+			return true;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				ps.close();
+			} catch (SQLException e) {
+				// ... can do nothing if things go wrong here
+			}
+		}
+
+		return false;
+	}
 }

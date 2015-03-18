@@ -67,6 +67,20 @@ public class PalletController {
         }
     }
 
+	public boolean blockAll() {
+
+		Integer[] ids = new Integer[observableList.size()];
+
+		int i = 0;
+		for (Pallet p : observableList) {
+			ids[i++] = p.getPalletId().getValue();
+			p.blocked().set(true);
+		}
+
+		return db.blockAllPallets(ids);
+
+	}
+
 	private Pallet findPalletById(int id) {
 
 		for (Pallet p : observableList) {
