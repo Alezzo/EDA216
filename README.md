@@ -1,6 +1,6 @@
 # EDA216
 
-Final project for the course [EDA216 - Database Technology](http://cs.lth.se/eda216/).
+Project for the course [EDA216 - Database Technology](http://cs.lth.se/eda216/).
 
 To start the program use `java -jar eda216.jar`.
 
