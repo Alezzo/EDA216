@@ -6,7 +6,12 @@ To start the program use `java -jar eda216.jar`.
 
 As per requirement there is currently no GUI for viewing ingredient usage, the query ```select * from Ingredient_storage;``` can be used.
 
+![Screenshot](/doc/screenshot.png?raw=true "Screenshot")
+
 ## Database Schema:
+
+![UML](/doc/model.png?raw=true "UML Diagram")
+
 ```sql
 create table Customer (
 	customerName VARCHAR(45), 
